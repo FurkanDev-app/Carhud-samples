@@ -61,18 +61,44 @@ aynı `carhud` NUI mesajını dinler. Yakıt %20'nin altına düşünce fuel tas
 kırmızıya döner; RPM kırmızı bölgeye girince Tach/Core kırmızılaşır, Shift Lights flaş yapar.
 Kullanmayacağınız tasarımın HTML bloğunu silmeniz yeterli.
 
+## Speed Gallery — 15 hız göstergesi tasarımı
+
+`speed-gallery.html` dosyasında klasikten fanteziye 15 bağımsız hız göstergesi bulunur:
+
+| # | Tasarım | Stil |
+|---|---------|------|
+| S01 | Dash Arc | Segmentli 270° yay (yaygın) |
+| S02 | Wings | Simetrik çift kanat yay |
+| S03 | Minimal | Sade dijital + ince çizgi (yaygın) |
+| S04 | Squircle | Yuvarlak kare çevre progress (modern) |
+| S05 | Retro LCD | 7 segment hayaletli amber panel (retro) |
+| S06 | Aero Tape | Havacılık tipi kayan hız şeridi |
+| S07 | Radar | Conic süpürme izi + iğne |
+| S08 | Chevron Rush | Hızla yanan ok dizisi |
+| S09 | Neon Tunnel | İçten dışa dolan 3 halka |
+| S10 | Liquid Orb | Sıvı dolumlu cam küre (dalga animasyonlu) |
+| S11 | Crystal | Elmas panel, ışık süpürmeli |
+| S12 | Glitch | Cyberpunk köşe çerçevesi + RGB kayması |
+| S13 | Slider | Dolum barını izleyen baloncuk |
+| S14 | Vintage | Fildişi kadranlı klasik yarım analog |
+| S15 | Comet | Halkada dolaşan kuyruklu nokta |
+
+Tümü `window.SpeedHud.setSpeed(kmh)` ile beslenir ve aynı `carhud` NUI mesajını dinler.
+
 ## Dosya yapısı
 
 ```
 index.html             → 6 farklı widget tipinin vitrini
 classic-themes.html    → Classic Gauge tema varyantları vitrini
 widget-packs.html      → 3 widget paketi × 5 tasarım vitrini
+speed-gallery.html     → 15 hız göstergesi tasarımı vitrini
 css/hud.css            → widget vitrini stilleri
 css/classic-gauge.css  → Classic Gauge çekirdek stil + 6 tema
 css/widget-packs.css   → widget paketlerinin stilleri
 js/hud.js              → vitrin widget API'si (CarHud.setSpeed vb.) + NUI listener
 js/classic-gauge.js    → Classic Gauge bileşeni (createClassicGauge) + NUI listener
 js/widget-packs.js     → widget paketleri API'si (HudV2) + NUI listener
+js/speed-gallery.js    → hız galerisi API'si (SpeedHud) + NUI listener
 js/demo.js             → index.html sahte veri animasyonu — FiveM'e taşırken SİLİN
 js/classic-demo.js     → classic-themes.html sahte veri animasyonu — FiveM'e taşırken SİLİN
 js/widget-packs-demo.js→ widget-packs.html sahte veri animasyonu — FiveM'e taşırken SİLİN
