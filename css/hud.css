@@ -1,0 +1,427 @@
+/* ============================================================
+   CarHUD Samples — FiveM HUD widget tasarımları
+   Palet (referans fotoğraftan):
+     zemin   : #060b1f  (koyu lacivert)
+     panel   : #0b1638 → #050a1c radyal
+     cyan    : #5ecbff  (glow halka)
+     beyaz   : #e8f2ff  (rakamlar)
+     altın   : #e9c46a  (vurgu)
+     kırmızı : #ff5d5d  (uyarı / redline)
+   ============================================================ */
+
+:root {
+  --hud-bg: #060b1f;
+  --hud-panel-hi: #0d1a42;
+  --hud-panel-lo: #040817;
+  --hud-cyan: #5ecbff;
+  --hud-cyan-dim: rgba(94, 140, 220, .18);
+  --hud-white: #e8f2ff;
+  --hud-gold: #e9c46a;
+  --hud-red: #ff5d5d;
+  --hud-font: "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+  --hud-font-digit: "Bahnschrift", "Segoe UI", "Roboto Condensed", Arial, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(1200px 600px at 70% -10%, rgba(46, 90, 200, .18), transparent 60%),
+    var(--hud-bg);
+  color: var(--hud-white);
+  font-family: var(--hud-font);
+}
+
+/* ---------- vitrin (showcase) düzeni — HUD'un parçası değil ---------- */
+
+.showcase-header { text-align: center; padding: 40px 16px 8px; }
+.showcase-header h1 {
+  font-size: 42px;
+  letter-spacing: 10px;
+  color: var(--hud-gold);
+  text-shadow: 0 0 24px rgba(233, 196, 106, .35);
+}
+.showcase-header h1 span { color: var(--hud-white); }
+.showcase-header p {
+  margin-top: 6px;
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: rgba(180, 205, 255, .55);
+}
+
+.showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 28px;
+  max-width: 1200px;
+  margin: 24px auto 40px;
+  padding: 0 24px;
+}
+
+.showcase-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding: 26px 18px 32px;
+  border: 1px solid rgba(94, 140, 220, .14);
+  border-radius: 14px;
+  background: rgba(8, 16, 40, .45);
+}
+
+.cell-title {
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: rgba(180, 205, 255, .6);
+  font-weight: 600;
+}
+
+.showcase-footer {
+  text-align: center;
+  padding: 0 16px 40px;
+  font-size: 12px;
+  color: rgba(180, 205, 255, .4);
+}
+
+/* ============================================================
+   01 — CLASSIC GAUGE  (fotoğraftaki stil)
+   ============================================================ */
+
+.widget-gauge-classic { width: 260px; height: 260px; }
+.widget-gauge-classic svg { width: 100%; height: 100%; }
+
+.widget-gauge-classic .gc-ticks text {
+  fill: rgba(220, 236, 255, .85);
+  font-family: var(--hud-font-digit);
+  font-size: 15px;
+  font-weight: 600;
+}
+.widget-gauge-classic .gc-ticks line {
+  stroke: rgba(220, 236, 255, .55);
+  stroke-width: 2;
+}
+.widget-gauge-classic .gc-ticks line.minor {
+  stroke: rgba(150, 185, 240, .3);
+  stroke-width: 1;
+}
+
+.widget-gauge-classic .gc-needle {
+  transform-origin: 150px 150px;
+  transition: transform .15s linear;
+  filter: drop-shadow(0 0 5px rgba(94, 203, 255, .8));
+}
+.widget-gauge-classic .gc-progress {
+  transition: stroke-dasharray .15s linear;
+}
+
+.widget-gauge-classic .gc-speed {
+  fill: var(--hud-white);
+  font-family: var(--hud-font-digit);
+  font-size: 46px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.widget-gauge-classic .gc-unit {
+  fill: rgba(160, 195, 250, .7);
+  font-size: 13px;
+  letter-spacing: 4px;
+  font-weight: 600;
+}
+
+/* ============================================================
+   02 — MODERN ARC
+   ============================================================ */
+
+.widget-gauge-arc {
+  position: relative;
+  width: 260px;
+  height: 260px;
+}
+.widget-gauge-arc svg { width: 100%; height: 100%; }
+
+.widget-gauge-arc .ga-progress { transition: stroke-dasharray .15s linear; }
+
+.widget-gauge-arc .ga-speed {
+  fill: var(--hud-white);
+  font-family: var(--hud-font-digit);
+  font-size: 62px;
+  font-weight: 700;
+}
+.widget-gauge-arc .ga-unit {
+  fill: rgba(160, 195, 250, .7);
+  font-size: 13px;
+  letter-spacing: 5px;
+  font-weight: 600;
+}
+.widget-gauge-arc .ga-gear-label {
+  fill: rgba(160, 195, 250, .5);
+  font-size: 10px;
+  letter-spacing: 4px;
+}
+.widget-gauge-arc .ga-gear {
+  fill: var(--hud-gold);
+  font-family: var(--hud-font-digit);
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.widget-gauge-arc .ga-fuel {
+  position: absolute;
+  left: 50%;
+  bottom: -2px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 130px;
+}
+.widget-gauge-arc .ga-fuel-icon { font-size: 13px; color: rgba(180, 205, 255, .7); }
+.widget-gauge-arc .ga-fuel-track {
+  flex: 1;
+  height: 5px;
+  border-radius: 3px;
+  background: var(--hud-cyan-dim);
+  overflow: hidden;
+}
+.widget-gauge-arc .ga-fuel-fill {
+  width: 100%;
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #2e7dff, var(--hud-cyan));
+  transition: width .3s ease;
+}
+.widget-gauge-arc .ga-fuel-fill.low { background: var(--hud-red); }
+
+/* ============================================================
+   03 — DIGITAL COMPACT
+   ============================================================ */
+
+.widget-digital {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 20px 34px;
+  border-radius: 14px;
+  border: 1px solid rgba(94, 140, 220, .25);
+  background: linear-gradient(155deg, rgba(13, 26, 66, .95), rgba(4, 8, 23, .95));
+  box-shadow:
+    0 0 30px rgba(46, 125, 255, .12),
+    inset 0 1px 0 rgba(220, 236, 255, .08);
+}
+
+.widget-digital .dg-speed-wrap { display: flex; align-items: baseline; gap: 10px; }
+.widget-digital .dg-speed {
+  font-family: var(--hud-font-digit);
+  font-size: 58px;
+  font-weight: 700;
+  color: var(--hud-white);
+  text-shadow: 0 0 18px rgba(94, 203, 255, .45);
+  min-width: 100px;
+  text-align: right;
+}
+.widget-digital .dg-unit {
+  font-size: 13px;
+  letter-spacing: 3px;
+  color: rgba(160, 195, 250, .65);
+  font-weight: 600;
+}
+
+.widget-digital .dg-divider {
+  width: 1px;
+  height: 52px;
+  background: linear-gradient(180deg, transparent, rgba(94, 140, 220, .5), transparent);
+}
+
+.widget-digital .dg-gear-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.widget-digital .dg-gear-label {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: rgba(160, 195, 250, .5);
+}
+.widget-digital .dg-gear {
+  font-family: var(--hud-font-digit);
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--hud-gold);
+  text-shadow: 0 0 16px rgba(233, 196, 106, .4);
+}
+
+/* ============================================================
+   04 — RPM STRIP
+   ============================================================ */
+
+.widget-rpm {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 24px;
+  border-radius: 12px;
+  border: 1px solid rgba(94, 140, 220, .25);
+  background: linear-gradient(155deg, rgba(13, 26, 66, .95), rgba(4, 8, 23, .95));
+}
+
+.widget-rpm .rpm-label {
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: rgba(160, 195, 250, .6);
+  font-weight: 600;
+}
+
+.widget-rpm .rpm-segments { display: flex; gap: 5px; }
+.widget-rpm .rpm-seg {
+  width: 12px;
+  height: 26px;
+  border-radius: 3px;
+  background: var(--hud-cyan-dim);
+  transform: skewX(-12deg);
+  transition: background .1s linear, box-shadow .1s linear;
+}
+.widget-rpm .rpm-seg.on {
+  background: var(--hud-cyan);
+  box-shadow: 0 0 10px rgba(94, 203, 255, .6);
+}
+.widget-rpm .rpm-seg.red.on {
+  background: var(--hud-red);
+  box-shadow: 0 0 10px rgba(255, 93, 93, .6);
+}
+
+.widget-rpm .rpm-gear {
+  font-family: var(--hud-font-digit);
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--hud-gold);
+  min-width: 28px;
+  text-align: center;
+}
+
+/* ============================================================
+   05 — STATUS BARS
+   ============================================================ */
+
+.widget-status {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 280px;
+  padding: 18px 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(94, 140, 220, .25);
+  background: linear-gradient(155deg, rgba(13, 26, 66, .95), rgba(4, 8, 23, .95));
+}
+
+.widget-status .st-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.widget-status .st-icon { width: 20px; text-align: center; font-size: 14px; }
+.widget-status .st-name {
+  width: 70px;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: rgba(160, 195, 250, .65);
+  font-weight: 600;
+}
+.widget-status .st-track {
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--hud-cyan-dim);
+  overflow: hidden;
+}
+.widget-status .st-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width .3s ease;
+}
+.widget-status .st-fill-fuel   { background: linear-gradient(90deg, #2e7dff, var(--hud-cyan)); }
+.widget-status .st-fill-engine { background: linear-gradient(90deg, #b78a2e, var(--hud-gold)); }
+.widget-status .st-fill.low    { background: var(--hud-red); }
+
+.widget-status .st-val {
+  width: 40px;
+  text-align: right;
+  font-family: var(--hud-font-digit);
+  font-size: 12px;
+  color: var(--hud-white);
+}
+
+.widget-status .st-belt-state {
+  margin-left: auto;
+  padding: 3px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+.widget-status .st-belt-state.on {
+  color: var(--hud-cyan);
+  background: rgba(94, 203, 255, .12);
+  box-shadow: inset 0 0 0 1px rgba(94, 203, 255, .4);
+}
+.widget-status .st-belt-state.off {
+  color: var(--hud-red);
+  background: rgba(255, 93, 93, .12);
+  box-shadow: inset 0 0 0 1px rgba(255, 93, 93, .5);
+  animation: beltBlink 1s steps(2) infinite;
+}
+@keyframes beltBlink { 50% { opacity: .35; } }
+
+/* ============================================================
+   06 — MINI PILL
+   ============================================================ */
+
+.widget-pill {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 22px 10px 12px;
+  border-radius: 50px;
+  border: 1px solid rgba(94, 140, 220, .25);
+  background: linear-gradient(155deg, rgba(13, 26, 66, .95), rgba(4, 8, 23, .95));
+  box-shadow: 0 0 24px rgba(46, 125, 255, .1);
+}
+
+.widget-pill .pill-ring {
+  position: relative;
+  width: 56px;
+  height: 56px;
+}
+.widget-pill .pill-ring svg { width: 100%; height: 100%; }
+.widget-pill .pill-progress {
+  stroke-dasharray: 0 100;
+  transition: stroke-dasharray .15s linear;
+  filter: drop-shadow(0 0 4px rgba(94, 203, 255, .7));
+}
+.widget-pill .pill-gear {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--hud-font-digit);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--hud-gold);
+}
+
+.widget-pill .pill-speed-wrap { display: flex; align-items: baseline; gap: 7px; }
+.widget-pill .pill-speed {
+  font-family: var(--hud-font-digit);
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--hud-white);
+  min-width: 62px;
+  text-align: right;
+}
+.widget-pill .pill-unit {
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: rgba(160, 195, 250, .6);
+  font-weight: 600;
+}
