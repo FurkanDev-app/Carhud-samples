@@ -110,6 +110,32 @@ Tümü `window.SpeedHud.setSpeed(kmh)` ile beslenir ve aynı `carhud` NUI mesaj�
 Tümü `window.AeroHud.setSpeed(knot)` ile beslenir ve aynı `carhud` NUI mesajını dinler.
 FiveM'de knot: `GetEntitySpeed(veh) * 1.94384`.
 
+## Cockpit Gallery — 15 uçak göstergesi (tam set)
+
+`cockpit-gallery.html` dosyasında hız dışındaki tüm temel uçak göstergeleri bulunur:
+
+| # | Gösterge | Birim / Davranış |
+|---|----------|------------------|
+| F01 | Altimeter | Çift ibreli klasik altimetre (100/1000 ft) + dijital pencere |
+| F02 | Attitude | Suni ufuk — pitch ladder + roll dönüşü, turuncu uçak sembolü |
+| F03 | Heading | Dönen pusula gülü (N/E/S/W amber) + dijital istikamet |
+| F04 | VSI | Varyometre ±2000 ft/min, UP/DN skalası |
+| F05 | Turn Coord | Yatışla dönen uçak sembolü + kayma topu |
+| F06 | AOA Indexer | F-18 tarzı hücum açısı ışıkları (chevron/donut) |
+| F07 | G-Meter | -2..+8 G ibre + kırmızı tepe (peak) işareti |
+| F08 | N1 Gauge | Motor devri %, 100 üstü kırmızı bölge |
+| F09 | EGT | Egzoz sıcaklığı barı — yeşil/sarı/kırmızı bölgeler |
+| F10 | Fuel Qty | Sol/sağ tank tüpleri (kg), %15 altında kırmızı blink |
+| F11 | Oil | Yağ basıncı (psi) + sıcaklığı (°C), yeşil bant bölgeleri |
+| F12 | Flaps | UP/1/2/FULL detentli pozisyon göstergesi |
+| F13 | Landing Gear | 3 ışık: yeşil DOWN, kırmızı blink TRANSIT, sönük UP |
+| F14 | Throttle | Gaz kolu pozisyonu, üstte AB (art yakıcı) bölgesi |
+| F15 | Radar Alt | Yerden yükseklik + DH (karar yüksekliği) amber uyarısı |
+
+Tümü `window.FlightHud.set({...})` ile beslenir; alanlar: `alt, vs, pitch, roll, hdg,
+slip, aoa, g, n1, egt, fuelL, fuelR, oilP, oilT, flaps, gear, thr, ra`.
+Aynı `carhud` NUI mesajı dinlenir.
+
 ## Dosya yapısı
 
 ```
@@ -118,6 +144,7 @@ classic-themes.html    → Classic Gauge tema varyantları vitrini
 widget-packs.html      → 3 widget paketi × 5 tasarım vitrini
 speed-gallery.html     → 15 hız göstergesi tasarımı vitrini
 aero-gallery.html      → 15 uçak hız ölçer tasarımı vitrini
+cockpit-gallery.html   → 15 uçak göstergesi (tam set) vitrini
 css/hud.css            → widget vitrini stilleri
 css/classic-gauge.css  → Classic Gauge çekirdek stil + 6 tema
 css/widget-packs.css   → widget paketlerinin stilleri
@@ -126,6 +153,7 @@ js/classic-gauge.js    → Classic Gauge bileşeni (createClassicGauge) + NUI li
 js/widget-packs.js     → widget paketleri API'si (HudV2) + NUI listener
 js/speed-gallery.js    → hız galerisi API'si (SpeedHud) + NUI listener
 js/aero-gallery.js     → uçak galerisi API'si (AeroHud) + NUI listener
+js/cockpit-gallery.js  → kokpit seti API'si (FlightHud) + NUI listener
 js/demo.js             → index.html sahte veri animasyonu — FiveM'e taşırken SİLİN
 js/classic-demo.js     → classic-themes.html sahte veri animasyonu — FiveM'e taşırken SİLİN
 js/widget-packs-demo.js→ widget-packs.html sahte veri animasyonu — FiveM'e taşırken SİLİN

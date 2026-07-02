@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cockpit Gallery — 15 Uçak Göstergesi</title>
+  <link rel="stylesheet" href="css/hud.css">
+  <link rel="stylesheet" href="css/cockpit-gallery.css">
+</head>
+<body>
+
+  <header class="showcase-header">
+    <h1>COCKPIT <span>GALLERY</span></h1>
+    <p>15 UÇAK GÖSTERGESİ &bull; ALTİMETREDEN İNİŞ TAKIMINA TAM SET &bull; FIVEM NUI READY</p>
+  </header>
+
+  <main class="showcase-grid pack">
+
+    <section class="showcase-cell">
+      <h3 class="cell-title">F01 &mdash; Altimeter <small>çift ibreli altimetre / feet</small></h3>
+      <div class="w-alt" id="f01"></div>
+    </section>
+
+    <section class="showcase-cell">
+      <h3 class="cell-title">F02 &mdash; Attitude <small>suni ufuk / pitch + roll</small></h3>
+      <div class="w-adi" id="f02"></div>
+    </section>
+
+    <section class="showcase-cell">
+      <h3 class="cell-title">F03 &mdash; Heading <small>dönen pusula gülü</small></h3>
+      <div class="w-hdg" id="f03"></div>
+    </section>
+
+    <section class="showcase-cell">
+      <h3 class="cell-title">F04 &mdash; VSI <small>varyometre / ft-min</small></h3>
+      <div class="w-vsi" id="f04"></div>
+    </section>
+
+    <section class="showcase-cell">
+      <h3 class="cell-title">F05 &mdash; Turn Coord <small>dönüş koordinatörü + kayma topu</small></h3>
+      <div class="w-tc" id="f05"></div>
+    </section>
+
+    <section class="showcase-cell">
+      <h3 class="cell-title">F06 &mdash; AOA Indexer <small>hücum açısı ışıkları</small></h3>
+      <div class="w-aoa" id="f06"></div>
+    </section>
+
+    <section class="showcase-cell">
+      <h3 class="cell-title">F07 &mdash; G-Meter <small>g kuvveti + tepe işareti</small></h3>
+      <div class="w-g" id="f07"></div>
+    </section>
+
+    <section class="showcase-cell">
+      <h3 class="cell-title">F08 &mdash; N1 Gauge <small>motor devri yüzdesi</small></h3>
+      <div class="w-n1" id="f08"></div>
+    </section>
+
+    <section class="showcase-cell">
+      <h3 class="cell-title">F09 &mdash; EGT <small>egzoz gazı sıcaklığı</small></h3>
+      <div class="w-egt" id="f09"></div>
+    </section>
+
+    <section class="showcase-cell">
+      <h3 class="cell-title">F10 &mdash; Fuel Qty <small>sol / sağ tank</small></h3>
+      <div class="w-fuel" id="f10"></div>
+    </section>
+
+    <section class="showcase-cell">
+      <h3 class="cell-title">F11 &mdash; Oil <small>yağ basıncı + sıcaklığı</small></h3>
+      <div class="w-oil" id="f11"></div>
+    </section>
+
+    <section class="showcase-cell">
+      <h3 class="cell-title">F12 &mdash; Flaps <small>flap pozisyonu</small></h3>
+      <div class="w-flaps" id="f12"></div>
+    </section>
+
+    <section class="showcase-cell">
+      <h3 class="cell-title">F13 &mdash; Landing Gear <small>3 yeşil ışık</small></h3>
+      <div class="w-gear" id="f13"></div>
+    </section>
+
+    <section class="showcase-cell">
+      <h3 class="cell-title">F14 &mdash; Throttle <small>gaz kolu pozisyonu</small></h3>
+      <div class="w-thr" id="f14"></div>
+    </section>
+
+    <section class="showcase-cell">
+      <h3 class="cell-title">F15 &mdash; Radar Alt <small>yerden yükseklik + DH uyarısı</small></h3>
+      <div class="w-ra" id="f15"></div>
+    </section>
+
+  </main>
+
+  <footer class="showcase-footer">
+    Veri köprüsü: SendNUIMessage({ type = 'carhud', alt, vs, pitch, roll, hdg, slip,
+    aoa, g, n1, egt, fuelL, fuelR, oilP, oilT, flaps, gear, thr, ra })
+  </footer>
+
+  <script src="js/cockpit-gallery.js"></script>
+  <script src="js/cockpit-gallery-demo.js"></script>
+</body>
+</html>
