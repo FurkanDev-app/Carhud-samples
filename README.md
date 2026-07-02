@@ -85,6 +85,31 @@ Kullanmayacağınız tasarımın HTML bloğunu silmeniz yeterli.
 
 Tümü `window.SpeedHud.setSpeed(kmh)` ile beslenir ve aynı `carhud` NUI mesajını dinler.
 
+## Aero Gallery — 15 uçak hız ölçer tasarımı
+
+`aero-gallery.html` dosyasında havacılık temalı 15 bağımsız hız ölçer bulunur (birim: knot):
+
+| # | Tasarım | Stil |
+|---|---------|------|
+| A01 | Steam ASI | Klasik airspeed indicator — renkli hız bantları (beyaz/yeşil/sarı) + redline |
+| A02 | PFD Tape | Airliner glass cockpit şeridi — siyah okuma kutusu, magenta hız bug'ı |
+| A03 | Combat HUD | Yeşil fosfor savaş uçağı HUD'u — scanline'lı, Mach okumalı |
+| A04 | Mach Meter | 240° ibreli Mach kadranı + dijital pencere |
+| A05 | Warbird | 2. Dünya Savaşı stili fildişi kadran, MPH |
+| A06 | V-Bug Arc | V hızları işaretli modern yay (VR, VFE, VNO, VNE) |
+| A07 | Glass Compact | Mini EFIS — trend oku + renkli hız bandı |
+| A08 | Panoramic | 5. nesil geniş kokpit paneli — ince rakamlar + Mach |
+| A09 | Mach Strip | Süpersonik yatay şerit — bölgeli, üçgen imleçli |
+| A10 | Rotor | Helikopter — hızla dönen 3 palli pervane |
+| A11 | Holo Ring | Hologram halka — dönen kesikli çember + flicker |
+| A12 | Ground Tape | Yatay kayan HUD şeridi |
+| A13 | IAS / TAS | Çift okuma paneli (TAS ≈ IAS × 1.15) |
+| A14 | Afterburner | Art yakıcı barı — %80 üstünde AB rozeti yanar |
+| A15 | Standby | Monokrom yedek gösterge — siyah/beyaz minimal |
+
+Tümü `window.AeroHud.setSpeed(knot)` ile beslenir ve aynı `carhud` NUI mesajını dinler.
+FiveM'de knot: `GetEntitySpeed(veh) * 1.94384`.
+
 ## Dosya yapısı
 
 ```
@@ -92,6 +117,7 @@ index.html             → 6 farklı widget tipinin vitrini
 classic-themes.html    → Classic Gauge tema varyantları vitrini
 widget-packs.html      → 3 widget paketi × 5 tasarım vitrini
 speed-gallery.html     → 15 hız göstergesi tasarımı vitrini
+aero-gallery.html      → 15 uçak hız ölçer tasarımı vitrini
 css/hud.css            → widget vitrini stilleri
 css/classic-gauge.css  → Classic Gauge çekirdek stil + 6 tema
 css/widget-packs.css   → widget paketlerinin stilleri
@@ -99,6 +125,7 @@ js/hud.js              → vitrin widget API'si (CarHud.setSpeed vb.) + NUI list
 js/classic-gauge.js    → Classic Gauge bileşeni (createClassicGauge) + NUI listener
 js/widget-packs.js     → widget paketleri API'si (HudV2) + NUI listener
 js/speed-gallery.js    → hız galerisi API'si (SpeedHud) + NUI listener
+js/aero-gallery.js     → uçak galerisi API'si (AeroHud) + NUI listener
 js/demo.js             → index.html sahte veri animasyonu — FiveM'e taşırken SİLİN
 js/classic-demo.js     → classic-themes.html sahte veri animasyonu — FiveM'e taşırken SİLİN
 js/widget-packs-demo.js→ widget-packs.html sahte veri animasyonu — FiveM'e taşırken SİLİN
