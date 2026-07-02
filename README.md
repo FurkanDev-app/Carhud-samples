@@ -19,13 +19,44 @@ Sadece tasarım içerir — oyun mantığı yoktur, kendi client script'inize ba
 | 05 | **Status Bars** | Yakıt / motor sağlığı barları + yanıp sönen kemer uyarısı |
 | 06 | **Mini Pill** | Ekran köşesi için ultra kompakt kapsül (hız halkası + vites) |
 
+## Classic Gauge temaları
+
+Ana widget olan **Classic Gauge** artık yeniden kullanılabilir bir bileşen:
+`classic-themes.html` dosyasını tarayıcıda açarak 6 temayı izleyebilirsiniz.
+
+| Tema | Sınıf | Palet |
+|------|-------|-------|
+| **Ice** | *(varsayılan)* | Lacivert + cyan glow (referans fotoğraf) |
+| **Redline** | `theme-redline` | Karbon siyahı + kırmızı |
+| **Toxic** | `theme-toxic` | Gece yeşili + neon yeşil |
+| **Synthwave** | `theme-synth` | Mor + magenta |
+| **Amber** | `theme-amber` | Retro / klasik otomobil kehribarı |
+| **Ghost** | `theme-ghost` | Monokrom / minimal beyaz |
+
+Kullanım — bir `div`'e sınıfı verip script'i eklemek yeterli:
+
+```html
+<link rel="stylesheet" href="css/classic-gauge.css">
+<div class="js-classic-gauge theme-redline" data-max="240" data-unit="KM/H"></div>
+<script src="js/classic-gauge.js"></script>
+```
+
+- `data-max` → gösterge tavanı (varsayılan 240)
+- `data-unit` → birim etiketi (örn. `MPH`)
+- Yeni tema = `css/classic-gauge.css` içindeki bir tema bloğunu kopyalayıp
+  renk değişkenlerini değiştirmek.
+
 ## Dosya yapısı
 
 ```
-index.html   → tüm widget'ların vitrini (NUI sayfanızın temeli)
-css/hud.css  → tüm widget stilleri (bölüm bölüm ayrılmış, tekini kopyalayıp alabilirsiniz)
-js/hud.js    → widget güncelleme API'si (CarHud.setSpeed vb.) + NUI message listener
-js/demo.js   → sahte veri animasyonu — FiveM'e taşırken SİLİN
+index.html            → 6 farklı widget tipinin vitrini
+classic-themes.html   → Classic Gauge tema varyantları vitrini
+css/hud.css           → widget vitrini stilleri
+css/classic-gauge.css → Classic Gauge çekirdek stil + 6 tema
+js/hud.js             → vitrin widget API'si (CarHud.setSpeed vb.) + NUI listener
+js/classic-gauge.js   → Classic Gauge bileşeni (createClassicGauge) + NUI listener
+js/demo.js            → index.html sahte veri animasyonu — FiveM'e taşırken SİLİN
+js/classic-demo.js    → classic-themes.html sahte veri animasyonu — FiveM'e taşırken SİLİN
 ```
 
 ## FiveM entegrasyonu
