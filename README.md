@@ -46,17 +46,36 @@ Kullanım — bir `div`'e sınıfı verip script'i eklemek yeterli:
 - Yeni tema = `css/classic-gauge.css` içindeki bir tema bloğunu kopyalayıp
   renk değişkenlerini değiştirmek.
 
+## Widget Packs — 3 widget × 5 tasarım
+
+`widget-packs.html` dosyasında üç widget paketi, her birinde 5 bağımsız tasarım bulunur:
+
+| Paket | Tasarımlar |
+|-------|-----------|
+| **A — Speed** | Horizon (yarım yay) · Tower (dikey slat bar) · Hex (altıgen panel) · Blade (italik/agresif) · Orbit (nokta halkası) |
+| **B — Fuel** | Ring (halka) · Tube (dikey depo) · Cells (segmentli) · Quarter (köşe yayı) · Pill (mini kapsül) |
+| **C — RPM & Gear** | Tach (mini takometre) · Shift Lights (F1 stili LED) · Gear Ladder (vites şeridi) · Equalizer (yükselen barlar) · Core (vites çekirdeği) |
+
+Tümü `window.HudV2` API'siyle (`setSpeed`, `setRpm`, `setGear`, `setFuel`) beslenir ve
+aynı `carhud` NUI mesajını dinler. Yakıt %20'nin altına düşünce fuel tasarımları
+kırmızıya döner; RPM kırmızı bölgeye girince Tach/Core kırmızılaşır, Shift Lights flaş yapar.
+Kullanmayacağınız tasarımın HTML bloğunu silmeniz yeterli.
+
 ## Dosya yapısı
 
 ```
-index.html            → 6 farklı widget tipinin vitrini
-classic-themes.html   → Classic Gauge tema varyantları vitrini
-css/hud.css           → widget vitrini stilleri
-css/classic-gauge.css → Classic Gauge çekirdek stil + 6 tema
-js/hud.js             → vitrin widget API'si (CarHud.setSpeed vb.) + NUI listener
-js/classic-gauge.js   → Classic Gauge bileşeni (createClassicGauge) + NUI listener
-js/demo.js            → index.html sahte veri animasyonu — FiveM'e taşırken SİLİN
-js/classic-demo.js    → classic-themes.html sahte veri animasyonu — FiveM'e taşırken SİLİN
+index.html             → 6 farklı widget tipinin vitrini
+classic-themes.html    → Classic Gauge tema varyantları vitrini
+widget-packs.html      → 3 widget paketi × 5 tasarım vitrini
+css/hud.css            → widget vitrini stilleri
+css/classic-gauge.css  → Classic Gauge çekirdek stil + 6 tema
+css/widget-packs.css   → widget paketlerinin stilleri
+js/hud.js              → vitrin widget API'si (CarHud.setSpeed vb.) + NUI listener
+js/classic-gauge.js    → Classic Gauge bileşeni (createClassicGauge) + NUI listener
+js/widget-packs.js     → widget paketleri API'si (HudV2) + NUI listener
+js/demo.js             → index.html sahte veri animasyonu — FiveM'e taşırken SİLİN
+js/classic-demo.js     → classic-themes.html sahte veri animasyonu — FiveM'e taşırken SİLİN
+js/widget-packs-demo.js→ widget-packs.html sahte veri animasyonu — FiveM'e taşırken SİLİN
 ```
 
 ## FiveM entegrasyonu
