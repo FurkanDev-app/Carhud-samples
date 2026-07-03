@@ -1,0 +1,119 @@
+/* ============================================================
+   Edge Panel — bisiklet bilgisayarı widget'ı (bağımsız)
+   Renkler :root bloğundan tek noktadan değiştirilebilir.
+   ============================================================ */
+
+:root {
+  --bk-screen: #050505;
+  --bk-frame-hi: #2b2e33;
+  --bk-frame-lo: #17191c;
+  --bk-divider: #26292e;
+  --bk-label: #9aa0a6;
+  --bk-digit: #f5f7f9;
+  --bk-red: #ff3b30;
+  --bk-digit-font: "Bahnschrift", "Arial Black", "Segoe UI", sans-serif;
+}
+
+/* vitrin ortalaması — HUD'a taşırken bu body stilini almayın */
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: #101216;
+}
+
+.w-edge .edge-frame {
+  width: 250px;
+  padding: 12px 9px;
+  border-radius: 26px;
+  background: linear-gradient(180deg, var(--bk-frame-hi), var(--bk-frame-lo));
+  box-shadow: 0 6px 24px rgba(0, 0, 0, .6), inset 0 1px 0 rgba(255, 255, 255, .08);
+}
+.w-edge .edge-screen {
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bk-screen);
+  display: flex;
+  flex-direction: column;
+  font-family: "Segoe UI", "Roboto", Arial, sans-serif;
+}
+
+.w-edge .edge-row {
+  display: flex;
+  border-bottom: 1px solid var(--bk-divider);
+}
+.w-edge .edge-row:last-child { border-bottom: 0; }
+
+.w-edge .edge-field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 10px 8px 12px;
+  border-right: 1px solid var(--bk-divider);
+}
+.w-edge .edge-field:last-child { border-right: 0; }
+
+.w-edge .ef-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--bk-label);
+  align-self: flex-start;
+}
+
+.w-edge .ef-val {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  font-family: var(--bk-digit-font);
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--bk-digit);
+}
+.w-edge .ef-val small {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--bk-label);
+}
+
+.w-edge .edge-row.big .edge-field { padding: 12px 12px 16px; }
+.w-edge .ef-big {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+}
+.w-edge .ef-big .eg-speed {
+  font-family: var(--bk-digit-font);
+  font-size: 62px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--bk-digit);
+}
+.w-edge .ef-big small {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--bk-label);
+}
+
+.w-edge .bike-icon {
+  width: 44px;
+  height: 28px;
+  stroke: var(--bk-digit);
+  stroke-width: 2.4;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.w-edge .eg-heart {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--bk-red);
+  align-self: center;
+  animation: edgePulse .5s ease-in-out infinite;
+}
+@keyframes edgePulse { 50% { transform: scale(.72); opacity: .75; } }
