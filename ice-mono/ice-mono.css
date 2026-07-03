@@ -1,0 +1,47 @@
+/* ============================================================
+   Ice Mono — NFS tarzı monokrom takometre (bağımsız)
+   Vurgu rengi ice-mono.js başındaki ACCENT sabitinden değişir.
+   ============================================================ */
+
+:root {
+  --im-font: "Bahnschrift", "Arial Black", "Segoe UI", sans-serif;
+}
+
+/* vitrin ortalaması — HUD'a taşırken bu body stilini almayın */
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: #0b0d12;
+}
+
+.w-icemono { width: 245px; }
+.w-icemono svg { width: 100%; display: block; }
+
+.w-icemono .im-num {
+  fill: #eef1f5;
+  font-family: var(--im-font);
+  font-size: 19px;
+  font-weight: 700;
+}
+
+.w-icemono .im-needle {
+  transform-origin: 115px 115px;
+  transition: transform .1s linear;
+}
+.w-icemono .im-inner { transition: stroke-dasharray .12s linear; }
+
+.w-icemono .im-speed {
+  fill: #eef1f5;
+  font-family: var(--im-font);
+  font-size: 38px;
+  font-weight: 800;
+}
+.w-icemono .im-mph {
+  fill: rgba(238, 241, 245, .55);
+  font-family: var(--im-font);
+  font-size: 12px;
+  letter-spacing: 3px;
+  font-weight: 700;
+}
