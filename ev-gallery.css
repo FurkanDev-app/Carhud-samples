@@ -1,0 +1,452 @@
+/* ============================================================
+   EV Gallery — elektrikli araç tarzı hız göstergeleri
+   Palet: grafit zemin, elektrik turkuazı, rejen yeşili,
+   Tesla tarzı temiz beyaz rakamlar.
+   ============================================================ */
+
+:root {
+  --ev-bg: #0c0e12;
+  --ev-panel: #12151b;
+  --ev-frame: #232833;
+  --ev-divider: #262b36;
+  --ev-label: #8b95a5;
+  --ev-digit: #f2f6fa;
+  --ev-teal: #22e4c4;
+  --ev-blue: #3aa8ff;
+  --ev-green: #3ddc84;
+  --ev-amber: #ffb03b;
+  --ev-red: #ff4b4b;
+  --ev-font: "Segoe UI", "Roboto", Arial, sans-serif;
+  --ev-digit-font: "Bahnschrift", "Segoe UI", "Roboto Condensed", Arial, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(1200px 600px at 70% -10%, rgba(34, 228, 196, .07), transparent 60%),
+    var(--ev-bg);
+  color: var(--ev-digit);
+  font-family: var(--ev-font);
+}
+
+/* ---------- vitrin düzeni ---------- */
+
+.showcase-header { text-align: center; padding: 40px 16px 8px; }
+.showcase-header h1 {
+  font-size: 42px; letter-spacing: 10px;
+  color: var(--ev-teal);
+  text-shadow: 0 0 24px rgba(34, 228, 196, .35);
+}
+.showcase-header h1 span { color: var(--ev-digit); }
+.showcase-header p {
+  margin-top: 6px; font-size: 11px; letter-spacing: 4px;
+  color: rgba(139, 149, 165, .7);
+}
+.showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 28px;
+  max-width: 1200px;
+  margin: 24px auto 10px;
+  padding: 0 24px;
+}
+.showcase-cell {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 18px;
+  min-height: 250px;
+  padding: 26px 18px 32px;
+  border: 1px solid rgba(139, 149, 165, .12);
+  border-radius: 14px;
+  background: rgba(18, 21, 27, .6);
+}
+.cell-title {
+  font-size: 12px; letter-spacing: 3px;
+  color: rgba(139, 149, 165, .85);
+  font-weight: 600; text-align: center;
+}
+.cell-title small {
+  display: block; margin-top: 3px;
+  font-size: 10px; letter-spacing: 1px;
+  color: rgba(139, 149, 165, .4);
+  font-weight: 400;
+}
+.showcase-footer {
+  text-align: center;
+  padding: 24px 16px 40px;
+  font-size: 12px;
+  color: rgba(139, 149, 165, .45);
+}
+
+@keyframes evBlink { 50% { opacity: .3; } }
+
+/* ============================================================
+   T01 — MINIMAL (Tesla tarzı)
+   ============================================================ */
+
+.w-tmin {
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+  min-width: 220px;
+}
+.w-tmin .tm-speedrow { display: flex; align-items: baseline; gap: 10px; }
+.w-tmin .tm-speed {
+  font-family: var(--ev-digit-font);
+  font-size: 84px; font-weight: 300; line-height: 1;
+  letter-spacing: 2px;
+  color: var(--ev-digit);
+  min-width: 150px; text-align: right;
+}
+.w-tmin .tm-unit { font-size: 13px; letter-spacing: 3px; color: var(--ev-label); }
+.w-tmin .tm-powerbar {
+  display: flex; align-items: center;
+  width: 230px; height: 4px;
+}
+.w-tmin .tm-half {
+  flex: 1; height: 100%;
+  background: rgba(139, 149, 165, .15);
+  overflow: hidden;
+  position: relative;
+}
+.w-tmin .tm-half.regen { border-radius: 2px 0 0 2px; }
+.w-tmin .tm-half.power { border-radius: 0 2px 2px 0; }
+.w-tmin .tm-fill {
+  position: absolute; top: 0; bottom: 0;
+  width: 0;
+  transition: width .12s linear;
+}
+.w-tmin .tm-fill.rf {
+  right: 0;
+  background: var(--ev-green);
+  box-shadow: 0 0 8px rgba(61, 220, 132, .6);
+}
+.w-tmin .tm-fill.pf {
+  left: 0;
+  background: var(--ev-digit);
+  box-shadow: 0 0 8px rgba(242, 246, 250, .5);
+}
+.w-tmin .tm-zero {
+  width: 2px; height: 10px;
+  background: var(--ev-label);
+  margin: 0 2px;
+}
+
+/* ============================================================
+   T02 — EV ARC
+   ============================================================ */
+
+.w-tarc { width: 195px; }
+.w-tarc svg { width: 100%; display: block; }
+.w-tarc .ta-track {
+  stroke: rgba(34, 228, 196, .12); stroke-width: 9;
+  fill: none; stroke-linecap: round;
+}
+.w-tarc .ta-progress {
+  stroke: var(--ev-teal); stroke-width: 9;
+  fill: none; stroke-linecap: round;
+  filter: drop-shadow(0 0 6px rgba(34, 228, 196, .7));
+  transition: stroke-dasharray .15s linear;
+}
+.w-tarc .ta-speed {
+  fill: var(--ev-digit);
+  font-family: var(--ev-digit-font); font-size: 46px; font-weight: 700;
+}
+.w-tarc .ta-unit { fill: var(--ev-label); font-size: 11px; letter-spacing: 4px; }
+.w-tarc .ta-kw {
+  fill: var(--ev-teal);
+  font-family: var(--ev-digit-font); font-size: 15px; font-weight: 700;
+}
+
+/* ============================================================
+   T03 — POWER RING
+   ============================================================ */
+
+.w-tring { width: 195px; }
+.w-tring svg { width: 100%; display: block; }
+.w-tring .tr-track {
+  fill: none;
+  stroke: rgba(139, 149, 165, .14); stroke-width: 9;
+}
+.w-tring .tr-pow {
+  fill: none;
+  stroke: var(--ev-blue); stroke-width: 9; stroke-linecap: round;
+  filter: drop-shadow(0 0 6px rgba(58, 168, 255, .7));
+  transition: stroke-dasharray .12s linear;
+}
+.w-tring .tr-reg {
+  fill: none;
+  stroke: var(--ev-green); stroke-width: 9; stroke-linecap: round;
+  filter: drop-shadow(0 0 6px rgba(61, 220, 132, .7));
+  transition: stroke-dasharray .12s linear;
+}
+.w-tring .tr-speed {
+  fill: var(--ev-digit);
+  font-family: var(--ev-digit-font); font-size: 42px; font-weight: 700;
+}
+.w-tring .tr-unit { fill: var(--ev-label); font-size: 10px; letter-spacing: 4px; }
+.w-tring .tr-kw {
+  fill: var(--ev-blue);
+  font-family: var(--ev-digit-font); font-size: 14px; font-weight: 700;
+}
+.w-tring .tr-lbl-r { fill: rgba(58, 168, 255, .6); font-size: 9px; letter-spacing: 1px; }
+.w-tring .tr-lbl-l { fill: rgba(61, 220, 132, .6); font-size: 9px; letter-spacing: 1px; }
+
+/* ============================================================
+   T04 — RANGE CARD
+   ============================================================ */
+
+.w-trange {
+  display: flex; flex-direction: column; gap: 12px;
+  min-width: 230px;
+  padding: 20px 24px;
+  border-radius: 12px;
+  background: var(--ev-panel);
+  border: 1px solid var(--ev-frame);
+}
+.w-trange .tg-top { display: flex; align-items: baseline; gap: 9px; }
+.w-trange .tg-speed {
+  font-family: var(--ev-digit-font);
+  font-size: 58px; font-weight: 700; line-height: 1;
+  color: var(--ev-digit);
+  min-width: 104px; text-align: right;
+}
+.w-trange .tg-unit { font-size: 12px; letter-spacing: 3px; color: var(--ev-label); }
+.w-trange .tg-batrow { display: flex; align-items: center; gap: 10px; }
+.w-trange .tg-battrack {
+  flex: 1; height: 8px; border-radius: 4px;
+  background: rgba(139, 149, 165, .15);
+  overflow: hidden;
+}
+.w-trange .tg-batfill {
+  width: 100%; height: 100%; border-radius: 4px;
+  background: linear-gradient(90deg, #1fae68, var(--ev-green));
+  transition: width .3s ease;
+}
+.w-trange .tg-batfill.low {
+  background: var(--ev-red);
+  animation: evBlink 1s steps(2) infinite;
+}
+.w-trange .tg-batpct {
+  font-family: var(--ev-digit-font); font-size: 15px; font-weight: 700;
+  color: var(--ev-digit);
+  min-width: 44px; text-align: right;
+}
+.w-trange.low .tg-batpct { color: var(--ev-red); }
+.w-trange .tg-rangerow {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding-top: 8px;
+  border-top: 1px solid var(--ev-divider);
+}
+.w-trange .tg-rangelabel { font-size: 11px; letter-spacing: 2px; color: var(--ev-label); }
+.w-trange .tg-range {
+  font-family: var(--ev-digit-font); font-size: 20px; font-weight: 700;
+  color: var(--ev-teal);
+}
+
+/* ============================================================
+   T05 — VOLT SEGMENTS
+   ============================================================ */
+
+.w-tvolt {
+  display: flex; flex-direction: column; gap: 12px;
+  min-width: 230px;
+  padding: 20px 26px;
+  border-radius: 12px;
+  background: var(--ev-panel);
+  border: 1px solid var(--ev-frame);
+}
+.w-tvolt .tv-row { display: flex; align-items: baseline; gap: 10px; }
+.w-tvolt .ev-bolt {
+  width: 15px; height: 25px;
+  align-self: center;
+  fill: var(--ev-amber);
+  filter: drop-shadow(0 0 5px rgba(255, 176, 59, .6));
+}
+.w-tvolt .tv-speed {
+  font-family: var(--ev-digit-font);
+  font-size: 54px; font-weight: 700; line-height: 1;
+  color: var(--ev-digit);
+  min-width: 100px; text-align: right;
+}
+.w-tvolt .tv-unit { font-size: 11px; letter-spacing: 3px; color: var(--ev-label); }
+.w-tvolt .tv-segs { display: flex; gap: 4px; }
+.w-tvolt .tv-seg {
+  flex: 1; height: 18px;
+  border-radius: 2px;
+  background: rgba(139, 149, 165, .14);
+  transform: skewX(-14deg);
+  transition: background .1s linear, box-shadow .1s linear;
+}
+.w-tvolt .tv-seg.on {
+  background: var(--ev-teal);
+  box-shadow: 0 0 8px rgba(34, 228, 196, .55);
+}
+.w-tvolt .tv-seg.on:nth-child(n+11) {
+  background: var(--ev-amber);
+  box-shadow: 0 0 8px rgba(255, 176, 59, .55);
+}
+
+/* ============================================================
+   T06 — MINI CLUSTER
+   ============================================================ */
+
+.w-tclu {
+  position: relative;
+  width: 260px;
+  padding: 14px 18px 16px;
+  border-radius: 14px;
+  background: var(--ev-panel);
+  border: 1px solid var(--ev-frame);
+  overflow: hidden;
+}
+.w-tclu .tc-arc {
+  position: absolute; left: 0; top: 6px;
+  width: 100%; height: 96px;
+  pointer-events: none;
+}
+.w-tclu .tc-track {
+  stroke: rgba(139, 149, 165, .14); stroke-width: 6;
+  fill: none; stroke-linecap: round;
+}
+.w-tclu .tc-progress {
+  stroke: var(--ev-teal); stroke-width: 6;
+  fill: none; stroke-linecap: round;
+  filter: drop-shadow(0 0 5px rgba(34, 228, 196, .6));
+  transition: stroke-dasharray .15s linear;
+}
+.w-tclu .tc-body {
+  position: relative;
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 10px;
+  padding-top: 30px;
+}
+.w-tclu .tc-side {
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+  padding-bottom: 4px;
+}
+.w-tclu .tc-sidelabel { font-size: 9px; letter-spacing: 2px; color: var(--ev-label); }
+.w-tclu .tc-bat, .w-tclu .tc-kw {
+  font-family: var(--ev-digit-font); font-size: 17px; font-weight: 700;
+  color: var(--ev-digit);
+}
+.w-tclu .tc-center {
+  display: flex; flex-direction: column; align-items: center; gap: 1px;
+}
+.w-tclu .tc-speed {
+  font-family: var(--ev-digit-font);
+  font-size: 52px; font-weight: 700; line-height: 1;
+  color: var(--ev-digit);
+}
+.w-tclu .tc-unit { font-size: 10px; letter-spacing: 3px; color: var(--ev-label); }
+
+/* ============================================================
+   T07 — NEO DIGITAL
+   ============================================================ */
+
+.w-tneo {
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  padding: 22px 34px;
+  border-radius: 12px;
+  background: var(--ev-panel);
+  border: 1px solid var(--ev-frame);
+}
+.w-tneo .tn-ready {
+  display: flex; align-items: center; gap: 7px;
+  font-size: 11px; font-weight: 700; letter-spacing: 3px;
+  color: var(--ev-green);
+}
+.w-tneo .tn-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--ev-green);
+  box-shadow: 0 0 8px rgba(61, 220, 132, .8);
+}
+.w-tneo.charging .tn-ready { color: var(--ev-amber); }
+.w-tneo.charging .tn-dot {
+  background: var(--ev-amber);
+  box-shadow: 0 0 8px rgba(255, 176, 59, .8);
+  animation: evBlink .6s steps(2) infinite;
+}
+.w-tneo .tn-row { display: flex; align-items: baseline; gap: 10px; }
+.w-tneo .tn-speed {
+  font-family: var(--ev-digit-font);
+  font-size: 72px; font-weight: 700; line-height: 1;
+  min-width: 130px; text-align: right;
+  background: linear-gradient(180deg, #ffffff 20%, var(--ev-teal));
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 14px rgba(34, 228, 196, .45));
+}
+.w-tneo .tn-unit { font-size: 12px; letter-spacing: 3px; color: var(--ev-label); }
+.w-tneo .tn-line {
+  width: 150px; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--ev-teal), transparent);
+}
+
+/* ============================================================
+   T08 — REGEN METER
+   ============================================================ */
+
+.w-tregen {
+  display: flex; flex-direction: column; gap: 10px;
+  min-width: 240px;
+  padding: 20px 24px;
+  border-radius: 12px;
+  background: var(--ev-panel);
+  border: 1px solid var(--ev-frame);
+}
+.w-tregen .tg8-speedrow {
+  display: flex; align-items: baseline; justify-content: center; gap: 9px;
+}
+.w-tregen .tg8-speed {
+  font-family: var(--ev-digit-font);
+  font-size: 50px; font-weight: 700; line-height: 1;
+  color: var(--ev-digit);
+  min-width: 92px; text-align: right;
+}
+.w-tregen .tg8-unit { font-size: 11px; letter-spacing: 3px; color: var(--ev-label); }
+.w-tregen .tg8-meter {
+  position: relative;
+  height: 10px; border-radius: 5px;
+  background: rgba(139, 149, 165, .14);
+  overflow: visible;
+}
+.w-tregen .tg8-fill {
+  position: absolute; top: 0; bottom: 0;
+  width: 0;
+  transition: width .12s linear;
+}
+.w-tregen .tg8-fill.pow {
+  left: 50%;
+  background: linear-gradient(90deg, var(--ev-blue), #7cc4ff);
+  border-radius: 0 5px 5px 0;
+}
+.w-tregen .tg8-fill.reg {
+  right: 50%;
+  background: linear-gradient(270deg, var(--ev-green), #7ff0b2);
+  border-radius: 5px 0 0 5px;
+}
+.w-tregen .tg8-needle {
+  position: absolute; top: -4px;
+  width: 3px; height: 18px;
+  background: var(--ev-digit);
+  box-shadow: 0 0 6px rgba(242, 246, 250, .8);
+  transform: translateX(-50%);
+  transition: left .12s linear;
+}
+.w-tregen .tg8-ticks {
+  display: flex; justify-content: space-between;
+  padding: 0 1px;
+}
+.w-tregen .tg8-tick {
+  width: 1px; height: 5px;
+  background: rgba(139, 149, 165, .4);
+}
+.w-tregen .tg8-tick.mid { height: 8px; width: 2px; background: var(--ev-label); }
+.w-tregen .tg8-labels {
+  display: flex; justify-content: space-between;
+  font-size: 9px; font-weight: 700; letter-spacing: 2px;
+  color: var(--ev-label);
+}
+.w-tregen .tg8-labels span:first-child { color: rgba(61, 220, 132, .8); }
+.w-tregen .tg8-labels span:last-child { color: rgba(58, 168, 255, .8); }

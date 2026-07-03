@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EV Gallery — Elektrikli Araç Hız Göstergeleri</title>
+  <link rel="stylesheet" href="ev-gallery.css">
+</head>
+<body>
+
+  <header class="showcase-header">
+    <h1>EV <span>GALLERY</span></h1>
+    <p>ELEKTRİKLİ ARAÇ TARZI 8 HIZ GÖSTERGESİ &bull; GÜÇ / REJEN / BATARYA &bull; FIVEM NUI READY</p>
+  </header>
+
+  <main class="showcase-grid pack">
+
+    <section class="showcase-cell">
+      <h3 class="cell-title">T01 &mdash; Minimal <small>Tesla tarzı sade + güç barı</small></h3>
+      <div class="w-tmin" id="t01"></div>
+    </section>
+
+    <section class="showcase-cell">
+      <h3 class="cell-title">T02 &mdash; EV Arc <small>yay + kW okuması</small></h3>
+      <div class="w-tarc" id="t02"></div>
+    </section>
+
+    <section class="showcase-cell">
+      <h3 class="cell-title">T03 &mdash; Power Ring <small>sağ güç / sol rejen halkası</small></h3>
+      <div class="w-tring" id="t03"></div>
+    </section>
+
+    <section class="showcase-cell">
+      <h3 class="cell-title">T04 &mdash; Range Card <small>hız + batarya + menzil</small></h3>
+      <div class="w-trange" id="t04"></div>
+    </section>
+
+    <section class="showcase-cell">
+      <h3 class="cell-title">T05 &mdash; Volt Segments <small>şimşekli segment bar</small></h3>
+      <div class="w-tvolt" id="t05"></div>
+    </section>
+
+    <section class="showcase-cell">
+      <h3 class="cell-title">T06 &mdash; Mini Cluster <small>tek panelde hız/batarya/güç</small></h3>
+      <div class="w-tclu" id="t06"></div>
+    </section>
+
+    <section class="showcase-cell">
+      <h3 class="cell-title">T07 &mdash; Neo Digital <small>neon dijital + READY</small></h3>
+      <div class="w-tneo" id="t07"></div>
+    </section>
+
+    <section class="showcase-cell">
+      <h3 class="cell-title">T08 &mdash; Regen Meter <small>merkez sıfırlı güç ölçer</small></h3>
+      <div class="w-tregen" id="t08"></div>
+    </section>
+
+  </main>
+
+  <footer class="showcase-footer">
+    Veri köprüsü: SendNUIMessage({ type = 'carhud', speed, power, battery, range })
+    &mdash; power negatifse rejeneratif frenleme olarak gösterilir.
+  </footer>
+
+  <script src="ev-gallery.js"></script>
+  <script src="ev-gallery-demo.js"></script>
+</body>
+</html>
