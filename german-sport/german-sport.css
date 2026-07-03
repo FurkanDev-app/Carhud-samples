@@ -1,0 +1,71 @@
+/* ============================================================
+   German Sport — analog hız göstergesi (bağımsız)
+   Renkler :root bloğundan tek noktadan değiştirilebilir.
+   ============================================================ */
+
+:root {
+  --gs-tick: #f4f6f9;
+  --gs-needle: #ff2e1f;
+  --gs-bezel: #2a2d33;
+  --gs-font: "Bahnschrift", "Arial Narrow", Arial, sans-serif;
+}
+
+/* vitrin ortalaması — HUD'a taşırken bu body stilini almayın */
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: #0d0f13;
+}
+
+.w-german { width: 230px; }
+.w-german svg { width: 100%; display: block; }
+
+.w-german .an-bezel {
+  fill: #030405;
+  stroke: var(--gs-bezel);
+  stroke-width: 2.5;
+}
+
+.w-german .an-ticks line { stroke: var(--gs-tick); stroke-width: 2.2; stroke-linecap: round; }
+.w-german .an-ticks line.minor { stroke: rgba(244, 246, 249, .5); stroke-width: 1.2; }
+.w-german .an-ticks text {
+  fill: var(--gs-tick);
+  font-family: var(--gs-font);
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.w-german .an-unit {
+  fill: rgba(244, 246, 249, .65);
+  font-family: var(--gs-font);
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
+.w-german .ger-odo {
+  fill: #05070a;
+  stroke: #2e3239;
+  stroke-width: 1;
+}
+.w-german .ger-odoval {
+  fill: #cdd4dd;
+  font-family: "Consolas", monospace;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.w-german .an-needle {
+  transform-origin: 110px 110px;
+  transition: transform .15s linear;
+}
+.w-german .an-needle-main,
+.w-german .an-needle-tail {
+  stroke: var(--gs-needle);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.w-german .an-hub { fill: #0c0d0f; stroke: #3a3d44; stroke-width: 2; }
+.w-german .an-hub-core { fill: var(--gs-needle); }
