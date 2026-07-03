@@ -1,0 +1,411 @@
+/* ============================================================
+   Bike Gallery — bisiklet bilgisayarı tarzı widget'lar
+   Referans foto: Garmin Edge — siyah zemin, ince gri bölmeler,
+   küçük gri etiketler, kocaman blok beyaz rakamlar.
+   ============================================================ */
+
+:root {
+  --bk-screen: #050505;
+  --bk-panel: #0a0b0c;
+  --bk-frame: #23262b;
+  --bk-divider: #26292e;
+  --bk-label: #9aa0a6;
+  --bk-digit: #f5f7f9;
+  --bk-red: #ff3b30;
+  --bk-green: #3ddc84;
+  --bk-amber: #ffb03b;
+  --bk-blue: #4da3ff;
+  --bk-font: "Segoe UI", "Roboto", Arial, sans-serif;
+  --bk-digit-font: "Bahnschrift", "Arial Black", "Segoe UI", sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(1200px 600px at 70% -10%, rgba(60, 70, 90, .25), transparent 60%),
+    #101216;
+  color: var(--bk-digit);
+  font-family: var(--bk-font);
+}
+
+/* ---------- vitrin düzeni ---------- */
+
+.showcase-header { text-align: center; padding: 40px 16px 8px; }
+.showcase-header h1 {
+  font-size: 42px; letter-spacing: 10px;
+  color: var(--bk-green);
+  text-shadow: 0 0 24px rgba(61, 220, 132, .3);
+}
+.showcase-header h1 span { color: var(--bk-digit); }
+.showcase-header p {
+  margin-top: 6px; font-size: 11px; letter-spacing: 4px;
+  color: rgba(154, 160, 166, .7);
+}
+.showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 28px;
+  max-width: 1200px;
+  margin: 24px auto 10px;
+  padding: 0 24px;
+}
+.showcase-cell {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 18px;
+  min-height: 250px;
+  padding: 26px 18px 32px;
+  border: 1px solid rgba(154, 160, 166, .12);
+  border-radius: 14px;
+  background: rgba(16, 18, 22, .6);
+}
+.cell-title {
+  font-size: 12px; letter-spacing: 3px;
+  color: rgba(154, 160, 166, .8);
+  font-weight: 600; text-align: center;
+}
+.cell-title small {
+  display: block; margin-top: 3px;
+  font-size: 10px; letter-spacing: 1px;
+  color: rgba(154, 160, 166, .4);
+  font-weight: 400;
+}
+.showcase-footer {
+  text-align: center;
+  padding: 24px 16px 40px;
+  font-size: 12px;
+  color: rgba(154, 160, 166, .45);
+}
+
+@keyframes bkBlink { 50% { opacity: .3; } }
+
+/* ---------- ortak panel + etiket ---------- */
+
+.bk-panel {
+  display: flex; flex-direction: column; gap: 8px;
+  min-width: 220px;
+  padding: 16px 20px;
+  border-radius: 10px;
+  background: var(--bk-panel);
+  border: 1px solid var(--bk-frame);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, .5);
+}
+.bk-label {
+  font-size: 11px; font-weight: 600;
+  letter-spacing: .5px;
+  color: var(--bk-label);
+}
+
+.bike-icon {
+  width: 44px; height: 28px;
+  stroke: var(--bk-digit); stroke-width: 2.4;
+  fill: none; stroke-linecap: round; stroke-linejoin: round;
+}
+
+/* ============================================================
+   B01 — EDGE PANEL (fotoğraftaki düzen)
+   ============================================================ */
+
+.w-edge .edge-frame {
+  width: 250px;
+  padding: 12px 9px;
+  border-radius: 26px;
+  background: linear-gradient(180deg, #2b2e33, #17191c);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, .6), inset 0 1px 0 rgba(255, 255, 255, .08);
+}
+.w-edge .edge-screen {
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bk-screen);
+  display: flex; flex-direction: column;
+}
+.w-edge .edge-row {
+  display: flex;
+  border-bottom: 1px solid var(--bk-divider);
+}
+.w-edge .edge-row:last-child { border-bottom: 0; }
+.w-edge .edge-field {
+  flex: 1;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 3px;
+  padding: 10px 8px 12px;
+  border-right: 1px solid var(--bk-divider);
+}
+.w-edge .edge-field:last-child { border-right: 0; }
+.w-edge .ef-label {
+  font-size: 10px; font-weight: 600;
+  color: var(--bk-label);
+  align-self: flex-start;
+}
+.w-edge .ef-val {
+  display: flex; align-items: baseline; gap: 4px;
+  font-family: var(--bk-digit-font);
+  font-size: 30px; font-weight: 800;
+  color: var(--bk-digit);
+}
+.w-edge .ef-val small {
+  font-size: 10px; font-weight: 700;
+  color: var(--bk-label);
+}
+.w-edge .edge-row.big .edge-field { padding: 12px 12px 16px; }
+.w-edge .ef-big {
+  display: flex; align-items: baseline; gap: 7px;
+}
+.w-edge .ef-big .eg-speed {
+  font-family: var(--bk-digit-font);
+  font-size: 62px; font-weight: 800; line-height: 1;
+  color: var(--bk-digit);
+}
+.w-edge .ef-big small {
+  font-size: 12px; font-weight: 700;
+  color: var(--bk-label);
+}
+.w-edge .eg-heart {
+  width: 11px; height: 11px;
+  border-radius: 50%;
+  background: var(--bk-red);
+  align-self: center;
+  animation: bkPulse .5s ease-in-out infinite;
+}
+@keyframes bkPulse { 50% { transform: scale(.72); opacity: .75; } }
+
+/* ============================================================
+   B02 — SPEED FIELD
+   ============================================================ */
+
+.w-bspeed .bs-row {
+  display: flex; align-items: baseline; gap: 8px;
+}
+.w-bspeed .bs-val {
+  font-family: var(--bk-digit-font);
+  font-size: 72px; font-weight: 800; line-height: 1;
+  color: var(--bk-digit);
+  min-width: 178px; text-align: right;
+}
+.w-bspeed .bs-row small {
+  font-size: 13px; font-weight: 700;
+  color: var(--bk-label);
+}
+.w-bspeed .bs-max {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding-top: 6px;
+  border-top: 1px solid var(--bk-divider);
+}
+.w-bspeed .bs-maxval {
+  font-family: var(--bk-digit-font);
+  font-size: 18px; font-weight: 800;
+  color: var(--bk-digit);
+}
+
+/* ============================================================
+   B03 — HEART RATE
+   ============================================================ */
+
+.w-bhr .bh-row {
+  display: flex; align-items: baseline; gap: 10px;
+}
+.w-bhr .bh-heart {
+  width: 16px; height: 16px;
+  align-self: center;
+  background: var(--bk-red);
+  clip-path: path("M8 15 L1.6 8.4 A4.4 4.4 0 0 1 8 2.6 A4.4 4.4 0 0 1 14.4 8.4 Z");
+  animation: bkPulse .5s ease-in-out infinite;
+}
+.w-bhr .bh-val {
+  font-family: var(--bk-digit-font);
+  font-size: 58px; font-weight: 800; line-height: 1;
+  color: var(--bk-digit);
+  min-width: 104px; text-align: right;
+}
+.w-bhr .bh-row small { font-size: 12px; font-weight: 700; color: var(--bk-label); }
+.w-bhr .bh-zones { display: flex; gap: 4px; margin-top: 4px; }
+.w-bhr .hz-seg {
+  flex: 1; height: 7px; border-radius: 3px;
+  background: var(--bk-divider);
+  transition: background .2s;
+}
+.w-bhr .hz1.on { background: #8f9aa5; }
+.w-bhr .hz2.on { background: var(--bk-blue); }
+.w-bhr .hz3.on { background: var(--bk-green); }
+.w-bhr .hz4.on { background: var(--bk-amber); }
+.w-bhr .hz5.on { background: var(--bk-red); }
+
+/* ============================================================
+   B04 — POWER
+   ============================================================ */
+
+.w-bpwr .bp-row { display: flex; align-items: baseline; gap: 8px; }
+.w-bpwr .bp-val {
+  font-family: var(--bk-digit-font);
+  font-size: 58px; font-weight: 800; line-height: 1;
+  color: var(--bk-digit);
+  min-width: 122px; text-align: right;
+}
+.w-bpwr .bp-row small { font-size: 13px; font-weight: 700; color: var(--bk-label); }
+.w-bpwr .bp-zones { display: flex; gap: 3px; margin-top: 4px; }
+.w-bpwr .pz-seg {
+  flex: 1; height: 8px; border-radius: 2px;
+  background: var(--bk-divider);
+  transition: background .15s;
+}
+.w-bpwr .pz1.on { background: #7d8894; }
+.w-bpwr .pz2.on { background: #5f9fe0; }
+.w-bpwr .pz3.on { background: var(--bk-blue); }
+.w-bpwr .pz4.on { background: var(--bk-green); }
+.w-bpwr .pz5.on { background: var(--bk-amber); }
+.w-bpwr .pz6.on { background: #ff7a45; }
+.w-bpwr .pz7.on { background: var(--bk-red); }
+.w-bpwr .bp-foot {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding-top: 6px;
+  border-top: 1px solid var(--bk-divider);
+}
+.w-bpwr .bp-avg {
+  font-family: var(--bk-digit-font);
+  font-size: 18px; font-weight: 800;
+  color: var(--bk-digit);
+}
+
+/* ============================================================
+   B05 — CADENCE
+   ============================================================ */
+
+.bk-cad { flex-direction: row; align-items: center; gap: 16px; }
+.w-bcad .bc-crankwrap { width: 76px; height: 76px; }
+.w-bcad .bc-crankwrap svg { width: 100%; height: 100%; }
+.w-bcad .bc-ring {
+  fill: none;
+  stroke: var(--bk-divider); stroke-width: 3;
+}
+.w-bcad .bc-crank {
+  transform-origin: 30px 30px;
+  transition: transform .12s linear;
+}
+.w-bcad .bc-crank line { stroke: var(--bk-digit); stroke-width: 3.5; stroke-linecap: round; }
+.w-bcad .bc-pedal { fill: var(--bk-green); }
+.w-bcad .bc-hub { fill: var(--bk-digit); }
+.w-bcad .bc-read { display: flex; flex-direction: column; gap: 4px; }
+.w-bcad .bc-row { display: flex; align-items: baseline; gap: 7px; }
+.w-bcad .bc-val {
+  font-family: var(--bk-digit-font);
+  font-size: 52px; font-weight: 800; line-height: 1;
+  color: var(--bk-digit);
+  min-width: 82px; text-align: right;
+}
+.w-bcad .bc-row small { font-size: 12px; font-weight: 700; color: var(--bk-label); }
+
+/* ============================================================
+   B06 — CLIMB
+   ============================================================ */
+
+.w-bclimb .cl-top {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  gap: 18px;
+}
+.w-bclimb .cl-row { display: flex; align-items: baseline; gap: 6px; }
+.w-bclimb .cl-elev {
+  font-family: var(--bk-digit-font);
+  font-size: 44px; font-weight: 800; line-height: 1.05;
+  color: var(--bk-digit);
+}
+.w-bclimb .cl-row small { font-size: 11px; font-weight: 700; color: var(--bk-label); }
+.w-bclimb .cl-gradebox {
+  display: flex; flex-direction: column; align-items: flex-end; gap: 2px;
+}
+.w-bclimb .cl-grade {
+  font-family: var(--bk-digit-font);
+  font-size: 26px; font-weight: 800;
+}
+.w-bclimb .cl-grade.g-easy { color: var(--bk-green); }
+.w-bclimb .cl-grade.g-mid  { color: var(--bk-amber); }
+.w-bclimb .cl-grade.g-hard { color: var(--bk-red); }
+.w-bclimb .cl-slope { width: 100%; height: 36px; margin-top: 2px; }
+.w-bclimb .cl-base {
+  stroke: var(--bk-divider); stroke-width: 2; stroke-dasharray: 3 4;
+}
+.w-bclimb .cl-road {
+  stroke: var(--bk-digit); stroke-width: 3; stroke-linecap: round;
+  transform-origin: 80px 30px;
+  transition: transform .2s ease;
+}
+.w-bclimb .cl-rider { fill: var(--bk-green); }
+
+/* ============================================================
+   B07 — TRIP
+   ============================================================ */
+
+.bk-trip { gap: 10px; }
+.w-btrip .tr-row { display: flex; align-items: baseline; gap: 7px; }
+.w-btrip .tr-dist {
+  font-family: var(--bk-digit-font);
+  font-size: 54px; font-weight: 800; line-height: 1;
+  color: var(--bk-digit);
+}
+.w-btrip .tr-row small { font-size: 12px; font-weight: 700; color: var(--bk-label); }
+.w-btrip .tr-sub {
+  display: flex; gap: 24px;
+  padding-top: 8px;
+  border-top: 1px solid var(--bk-divider);
+}
+.w-btrip .tr-sub .tr-field { display: flex; flex-direction: column; gap: 2px; }
+.w-btrip .tr-time, .w-btrip .tr-avg {
+  font-family: var(--bk-digit-font);
+  font-size: 22px; font-weight: 800;
+  color: var(--bk-digit);
+}
+
+/* ============================================================
+   B08 — E-BIKE
+   ============================================================ */
+
+.bk-ebike { gap: 14px; }
+.w-bebike .eb-batwrap { display: flex; flex-direction: column; gap: 6px; }
+.w-bebike .eb-batt { display: flex; align-items: center; gap: 3px; }
+.w-bebike .eb-cells {
+  display: flex; gap: 3px;
+  padding: 4px;
+  border: 2px solid var(--bk-label);
+  border-radius: 5px;
+}
+.w-bebike .eb-cell {
+  width: 20px; height: 14px;
+  border-radius: 2px;
+  background: var(--bk-divider);
+  transition: background .2s;
+}
+.w-bebike .eb-cell.on { background: var(--bk-green); }
+.w-bebike.low .eb-cell.on {
+  background: var(--bk-red);
+  animation: bkBlink 1s steps(2) infinite;
+}
+.w-bebike .eb-cap {
+  width: 4px; height: 10px;
+  border-radius: 0 2px 2px 0;
+  background: var(--bk-label);
+}
+.w-bebike .eb-pct {
+  font-family: var(--bk-digit-font);
+  font-size: 20px; font-weight: 800;
+  color: var(--bk-digit);
+}
+.w-bebike.low .eb-pct { color: var(--bk-red); }
+.w-bebike .eb-assist { display: flex; flex-direction: column; gap: 6px; }
+.w-bebike .eb-modes { display: flex; gap: 6px; }
+.w-bebike .eb-mode {
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-family: var(--bk-digit-font);
+  font-size: 12px; font-weight: 800; letter-spacing: 1px;
+  color: var(--bk-label);
+  background: rgba(154, 160, 166, .08);
+  box-shadow: inset 0 0 0 1px var(--bk-divider);
+  transition: all .15s;
+}
+.w-bebike .eb-mode.active {
+  color: #06130b;
+  background: var(--bk-green);
+  box-shadow: 0 0 14px rgba(61, 220, 132, .4);
+}
