@@ -3,195 +3,58 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CarHUD Samples — FiveM Widget Tasarımları</title>
-  <link rel="stylesheet" href="css/hud.css">
+  <title>Selected Widgets — Seçilen Tasarımlar</title>
+  <link rel="stylesheet" href="selected.css">
 </head>
 <body>
 
   <header class="showcase-header">
-    <h1>CAR<span>HUD</span> SAMPLES</h1>
-    <p>REAL-TIME FEEDBACK &bull; VEHICLE HUDS &bull; FIVEM NUI READY</p>
+    <h1>SELECTED <span>WIDGETS</span></h1>
+    <p>SEÇİLEN 7 TASARIM &bull; BAĞIMSIZ VE TAŞIMAYA HAZIR &bull; FIVEM NUI READY</p>
   </header>
 
-  <main class="showcase-grid">
-
-    <!-- ============================================================
-         WIDGET 1 — Classic Gauge (fotoğraftaki stil)
-         Yuvarlak ibreli hız göstergesi, cyan glow halka
-    ============================================================ -->
+  <h2 class="group-title">ARAÇ <em>/ hız göstergeleri (km/h)</em></h2>
+  <main class="showcase-grid pack">
     <section class="showcase-cell">
-      <h2 class="cell-title">01 &mdash; Classic Gauge</h2>
-      <div class="widget widget-gauge-classic" id="gaugeClassic">
-        <svg viewBox="0 0 300 300">
-          <defs>
-            <radialGradient id="faceGrad" cx="50%" cy="42%" r="70%">
-              <stop offset="0%"  stop-color="#0d1a42"/>
-              <stop offset="70%" stop-color="#071026"/>
-              <stop offset="100%" stop-color="#040817"/>
-            </radialGradient>
-            <filter id="cyanGlow" x="-50%" y="-50%" width="200%" height="200%">
-              <feGaussianBlur stdDeviation="4" result="blur"/>
-              <feMerge>
-                <feMergeNode in="blur"/>
-                <feMergeNode in="SourceGraphic"/>
-              </feMerge>
-            </filter>
-          </defs>
-
-          <circle cx="150" cy="150" r="142" fill="url(#faceGrad)"/>
-          <circle cx="150" cy="150" r="136" fill="none"
-                  stroke="rgba(210,230,255,.75)" stroke-width="2.5"/>
-          <circle cx="150" cy="150" r="128" fill="none"
-                  stroke="rgba(120,170,255,.12)" stroke-width="10"/>
-
-          <!-- track + progress arc (JS dolduruyor) -->
-          <path class="gc-track" fill="none"
-                stroke="rgba(90,140,220,.18)" stroke-width="7" stroke-linecap="round"/>
-          <path class="gc-progress" fill="none" filter="url(#cyanGlow)"
-                stroke="#5ecbff" stroke-width="7" stroke-linecap="round"/>
-
-          <g class="gc-ticks"></g>
-
-          <!-- needle -->
-          <g class="gc-needle">
-            <line x1="150" y1="150" x2="258" y2="150"
-                  stroke="#dcecff" stroke-width="4" stroke-linecap="round"/>
-            <line x1="150" y1="150" x2="128" y2="150"
-                  stroke="#dcecff" stroke-width="4" stroke-linecap="round"/>
-          </g>
-          <circle cx="150" cy="150" r="9" fill="#e8f2ff"/>
-          <circle cx="150" cy="150" r="4" fill="#0a1430"/>
-
-          <text class="gc-speed" x="150" y="205" text-anchor="middle">0</text>
-          <text class="gc-unit"  x="150" y="226" text-anchor="middle">KM/H</text>
-        </svg>
-      </div>
+      <h3 class="cell-title">Classic Gauge <small>ana widget / ice tema</small></h3>
+      <div class="js-classic-gauge" id="selClassic"></div>
     </section>
-
-    <!-- ============================================================
-         WIDGET 2 — Modern Arc
-         270° gradyan yay, dijital hız + vites + mikro yakıt barı
-    ============================================================ -->
     <section class="showcase-cell">
-      <h2 class="cell-title">02 &mdash; Modern Arc</h2>
-      <div class="widget widget-gauge-arc" id="gaugeArc">
-        <svg viewBox="0 0 300 300">
-          <defs>
-            <linearGradient id="arcGrad" x1="0%" y1="100%" x2="100%" y2="0%">
-              <stop offset="0%"   stop-color="#2e7dff"/>
-              <stop offset="60%"  stop-color="#5ecbff"/>
-              <stop offset="100%" stop-color="#e9c46a"/>
-            </linearGradient>
-          </defs>
-
-          <path class="ga-track" fill="none"
-                stroke="rgba(94,140,220,.16)" stroke-width="14" stroke-linecap="round"/>
-          <path class="ga-progress" fill="none"
-                stroke="url(#arcGrad)" stroke-width="14" stroke-linecap="round"/>
-
-          <text class="ga-speed" x="150" y="158" text-anchor="middle">0</text>
-          <text class="ga-unit"  x="150" y="182" text-anchor="middle">KM/H</text>
-
-          <text class="ga-gear-label" x="150" y="215" text-anchor="middle">GEAR</text>
-          <text class="ga-gear" x="150" y="245" text-anchor="middle">N</text>
-        </svg>
-        <div class="ga-fuel">
-          <span class="ga-fuel-icon">&#9981;</span>
-          <div class="ga-fuel-track"><div class="ga-fuel-fill"></div></div>
-        </div>
-      </div>
+      <h3 class="cell-title">A1 &mdash; Horizon <small>yarım yay</small></h3>
+      <div class="w-horizon" id="selHorizon"></div>
     </section>
-
-    <!-- ============================================================
-         WIDGET 3 — Digital Compact
-         Minimal dijital kutu: hız + vites, altın vurgu
-    ============================================================ -->
     <section class="showcase-cell">
-      <h2 class="cell-title">03 &mdash; Digital Compact</h2>
-      <div class="widget widget-digital" id="digital">
-        <div class="dg-speed-wrap">
-          <span class="dg-speed">0</span>
-          <span class="dg-unit">KM/H</span>
-        </div>
-        <div class="dg-divider"></div>
-        <div class="dg-gear-wrap">
-          <span class="dg-gear-label">GEAR</span>
-          <span class="dg-gear">N</span>
-        </div>
-      </div>
+      <h3 class="cell-title">S01 &mdash; Dash Arc <small>segmentli yay</small></h3>
+      <div class="w-dasharc" id="selDash"></div>
     </section>
-
-    <!-- ============================================================
-         WIDGET 4 — RPM Strip
-         Segmentli devir barı + vites, kırmızı bölge
-    ============================================================ -->
     <section class="showcase-cell">
-      <h2 class="cell-title">04 &mdash; RPM Strip</h2>
-      <div class="widget widget-rpm" id="rpmStrip">
-        <span class="rpm-label">RPM</span>
-        <div class="rpm-segments"></div>
-        <span class="rpm-gear">N</span>
-      </div>
+      <h3 class="cell-title">S02 &mdash; Wings <small>çift kanat yay</small></h3>
+      <div class="w-wings" id="selWings"></div>
     </section>
+  </main>
 
-    <!-- ============================================================
-         WIDGET 5 — Status Bars
-         Yakıt / Motor / Kemer durum paneli
-    ============================================================ -->
+  <h2 class="group-title">UÇAK <em>/ kokpit göstergeleri</em></h2>
+  <main class="showcase-grid pack">
     <section class="showcase-cell">
-      <h2 class="cell-title">05 &mdash; Status Bars</h2>
-      <div class="widget widget-status" id="statusBars">
-        <div class="st-row" data-key="fuel">
-          <span class="st-icon">&#9981;</span>
-          <span class="st-name">FUEL</span>
-          <div class="st-track"><div class="st-fill st-fill-fuel"></div></div>
-          <span class="st-val">100%</span>
-        </div>
-        <div class="st-row" data-key="engine">
-          <span class="st-icon">&#9881;</span>
-          <span class="st-name">ENGINE</span>
-          <div class="st-track"><div class="st-fill st-fill-engine"></div></div>
-          <span class="st-val">100%</span>
-        </div>
-        <div class="st-row st-row-belt" data-key="belt">
-          <span class="st-icon">&#128737;</span>
-          <span class="st-name">SEATBELT</span>
-          <span class="st-belt-state">ON</span>
-        </div>
-      </div>
+      <h3 class="cell-title">F01 &mdash; Altimeter <small>çift ibreli / feet</small></h3>
+      <div class="w-alt" id="selAlt"></div>
     </section>
-
-    <!-- ============================================================
-         WIDGET 6 — Mini Pill
-         Ekran köşesi için ultra kompakt hız kapsülü
-    ============================================================ -->
     <section class="showcase-cell">
-      <h2 class="cell-title">06 &mdash; Mini Pill</h2>
-      <div class="widget widget-pill" id="pill">
-        <div class="pill-ring">
-          <svg viewBox="0 0 60 60">
-            <circle cx="30" cy="30" r="25" fill="none"
-                    stroke="rgba(94,140,220,.18)" stroke-width="5"/>
-            <circle class="pill-progress" cx="30" cy="30" r="25" fill="none"
-                    stroke="#5ecbff" stroke-width="5" stroke-linecap="round"
-                    pathLength="100" transform="rotate(-90 30 30)"/>
-          </svg>
-          <span class="pill-gear">N</span>
-        </div>
-        <div class="pill-speed-wrap">
-          <span class="pill-speed">0</span>
-          <span class="pill-unit">KM/H</span>
-        </div>
-      </div>
+      <h3 class="cell-title">F02 &mdash; Attitude <small>suni ufuk</small></h3>
+      <div class="w-adi" id="selAdi"></div>
     </section>
-
+    <section class="showcase-cell">
+      <h3 class="cell-title">F05 &mdash; Turn Coord <small>dönüş koordinatörü</small></h3>
+      <div class="w-tc" id="selTc"></div>
+    </section>
   </main>
 
   <footer class="showcase-footer">
-    Demo verisi otomatik oynatılıyor &mdash; FiveM entegrasyonu için README'ye bakın.
+    Veri köprüsü: SendNUIMessage({ type = 'carhud', speed, alt, pitch, roll, slip })
+    &mdash; ayrıntılar README.md içinde.
   </footer>
 
-  <script src="js/hud.js"></script>
-  <script src="js/demo.js"></script>
+  <script src="selected.js"></script>
+  <script src="selected-demo.js"></script>
 </body>
 </html>
