@@ -1,0 +1,61 @@
+/* ============================================================
+   Fuel Dial — uçak yakıt göstergesi (bağımsız, tek kadran)
+   Renkler :root bloğundan tek noktadan değiştirilebilir.
+   ============================================================ */
+
+:root {
+  --fd-face: #101318;
+  --fd-bezel: #2c3340;
+  --fd-tick: #dde5ef;
+  --fd-text: #eef2f8;
+  --fd-needle: #f4f7fb;
+  --fd-amber: #ffb03b;
+}
+
+/* vitrin ortalaması — HUD'a taşırken bu body stilini almayın */
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: #0d1015;
+}
+
+.w-fdial { width: 195px; }
+.w-fdial svg { width: 100%; display: block; }
+
+.w-fdial .fd-face { fill: var(--fd-face); }
+.w-fdial .fd-bezel { fill: none; stroke: var(--fd-bezel); stroke-width: 5; }
+
+.w-fdial .fd-ticks line { stroke: var(--fd-tick); stroke-width: 2.5; }
+.w-fdial .fd-ticks line.minor { stroke: rgba(221, 229, 239, .45); stroke-width: 1.5; }
+.w-fdial .fd-ticks text {
+  fill: var(--fd-text);
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.w-fdial .fd-label {
+  fill: rgba(221, 229, 239, .55);
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 10px;
+  letter-spacing: 3px;
+}
+/* yakıt %15'in altında: FUEL etiketi amber yanıp söner */
+.w-fdial.low .fd-label {
+  fill: var(--fd-amber);
+  animation: fdBlink .6s steps(2) infinite;
+}
+@keyframes fdBlink { 50% { opacity: .25; } }
+
+.w-fdial .fd-needle {
+  transform-origin: 100px 100px;
+  transition: transform .2s ease-out;
+}
+.w-fdial .fd-needle line {
+  stroke: var(--fd-needle);
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+.w-fdial .fd-hub { fill: #f4f7fb; stroke: #444; stroke-width: 2; }
