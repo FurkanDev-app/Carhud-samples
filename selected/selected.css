@@ -1,0 +1,335 @@
+/* ============================================================
+   Selected Widgets — seçilen 7 tasarımın bağımsız stilleri
+   (Classic Gauge, Horizon, Dash Arc, Wings,
+    Altimeter, Attitude, Turn Coordinator)
+   ============================================================ */
+
+:root {
+  --hud-bg: #060b1f;
+  --hud-cyan: #5ecbff;
+  --hud-cyan-dim: rgba(94, 140, 220, .18);
+  --hud-white: #e8f2ff;
+  --hud-gold: #e9c46a;
+  --hud-red: #ff5d5d;
+  --hud-font: "Segoe UI", "Roboto", "Helvetica Neue", Arial, sans-serif;
+  --hud-font-digit: "Bahnschrift", "Segoe UI", "Roboto Condensed", Arial, sans-serif;
+
+  --ins-face: #101318;
+  --ins-bezel: #2c3340;
+  --ins-tick: #dde5ef;
+  --ins-text: #eef2f8;
+  --adi-sky: #3d87d6;
+  --adi-ground: #7a5230;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(1200px 600px at 70% -10%, rgba(46, 90, 200, .18), transparent 60%),
+    var(--hud-bg);
+  color: var(--hud-white);
+  font-family: var(--hud-font);
+}
+
+/* ---------- vitrin düzeni — HUD'un parçası değil ---------- */
+
+.showcase-header { text-align: center; padding: 40px 16px 8px; }
+.showcase-header h1 {
+  font-size: 42px; letter-spacing: 10px;
+  color: var(--hud-gold);
+  text-shadow: 0 0 24px rgba(233, 196, 106, .35);
+}
+.showcase-header h1 span { color: var(--hud-white); }
+.showcase-header p {
+  margin-top: 6px; font-size: 11px; letter-spacing: 4px;
+  color: rgba(180, 205, 255, .55);
+}
+
+.group-title {
+  max-width: 1200px;
+  margin: 34px auto 0;
+  padding: 0 24px;
+  font-size: 15px; letter-spacing: 4px;
+  color: var(--hud-gold);
+}
+.group-title em {
+  font-style: normal; font-size: 11px; letter-spacing: 2px;
+  color: rgba(180, 205, 255, .45);
+}
+
+.showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 28px;
+  max-width: 1200px;
+  margin: 14px auto 10px;
+  padding: 0 24px;
+}
+.showcase-cell {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 18px;
+  min-height: 240px;
+  padding: 26px 18px 32px;
+  border: 1px solid rgba(94, 140, 220, .14);
+  border-radius: 14px;
+  background: rgba(8, 16, 40, .45);
+}
+.cell-title {
+  font-size: 12px; letter-spacing: 3px;
+  color: rgba(180, 205, 255, .6);
+  font-weight: 600; text-align: center;
+}
+.cell-title small {
+  display: block; margin-top: 3px;
+  font-size: 10px; letter-spacing: 1px;
+  color: rgba(180, 205, 255, .35);
+  font-weight: 400;
+}
+.showcase-footer {
+  text-align: center;
+  padding: 24px 16px 40px;
+  font-size: 12px;
+  color: rgba(180, 205, 255, .4);
+}
+
+/* ============================================================
+   CLASSIC GAUGE (ice tema)
+   ============================================================ */
+
+.gauge-classic { width: 240px; height: 240px; }
+.gauge-classic svg { width: 100%; height: 100%; display: block; }
+
+.gauge-classic .cg-face-hi  { stop-color: #0d1a42; }
+.gauge-classic .cg-face-mid { stop-color: #071026; }
+.gauge-classic .cg-face-lo  { stop-color: #040817; }
+.gauge-classic .cg-bezel { stroke: rgba(210, 230, 255, .75); stroke-width: 2.5; }
+.gauge-classic .cg-inner { stroke: rgba(120, 170, 255, .12); stroke-width: 10; }
+.gauge-classic .cg-track {
+  stroke: rgba(90, 140, 220, .18);
+  stroke-width: 7; stroke-linecap: round;
+}
+.gauge-classic .cg-progress {
+  stroke: var(--hud-cyan);
+  stroke-width: 7; stroke-linecap: round;
+  filter: drop-shadow(0 0 5px rgba(94, 203, 255, .8));
+  transition: stroke-dasharray .15s linear;
+}
+.gauge-classic .cg-tick { stroke: rgba(220, 236, 255, .55); stroke-width: 2; }
+.gauge-classic .cg-tick.minor { stroke: rgba(150, 185, 240, .3); stroke-width: 1; }
+.gauge-classic .cg-num {
+  fill: rgba(220, 236, 255, .85);
+  font-family: var(--hud-font-digit); font-size: 15px; font-weight: 600;
+}
+.gauge-classic .cg-needle {
+  transform-origin: 150px 150px;
+  transition: transform .15s linear;
+  filter: drop-shadow(0 0 5px rgba(94, 203, 255, .8));
+}
+.gauge-classic .cg-needle-main,
+.gauge-classic .cg-needle-tail {
+  stroke: #dcecff; stroke-width: 4; stroke-linecap: round;
+}
+.gauge-classic .cg-hub { fill: #e8f2ff; }
+.gauge-classic .cg-hub-core { fill: #0a1430; }
+.gauge-classic .cg-speed {
+  fill: var(--hud-white);
+  font-family: var(--hud-font-digit); font-size: 46px; font-weight: 700;
+  letter-spacing: 1px;
+}
+.gauge-classic .cg-unit {
+  fill: rgba(160, 195, 250, .7);
+  font-size: 13px; letter-spacing: 4px; font-weight: 600;
+}
+
+/* ============================================================
+   A1 — HORIZON
+   ============================================================ */
+
+.w-horizon { width: 270px; }
+.w-horizon svg { width: 100%; display: block; }
+.w-horizon .h-track {
+  stroke: var(--hud-cyan-dim); stroke-width: 8; fill: none; stroke-linecap: round;
+}
+.w-horizon .h-progress {
+  stroke: var(--hud-cyan); stroke-width: 8; fill: none; stroke-linecap: round;
+  filter: drop-shadow(0 0 5px rgba(94, 203, 255, .8));
+  transition: stroke-dasharray .15s linear;
+}
+.w-horizon .h-ticks line { stroke: rgba(220, 236, 255, .5); stroke-width: 2; }
+.w-horizon .h-ticks line.minor { stroke: rgba(150, 185, 240, .28); stroke-width: 1; }
+.w-horizon .h-ticks text {
+  fill: rgba(220, 236, 255, .7);
+  font-family: var(--hud-font-digit); font-size: 12px;
+}
+.w-horizon .h-speed {
+  fill: var(--hud-white);
+  font-family: var(--hud-font-digit); font-size: 44px; font-weight: 700;
+}
+.w-horizon .h-unit { fill: rgba(160, 195, 250, .7); font-size: 12px; letter-spacing: 4px; }
+
+/* ============================================================
+   S01 — DASH ARC
+   ============================================================ */
+
+.w-dasharc { width: 190px; }
+.w-dasharc svg { width: 100%; display: block; }
+.w-dasharc .da-seg {
+  stroke: rgba(94, 140, 220, .18);
+  stroke-width: 6; stroke-linecap: round;
+  transition: stroke .1s linear;
+}
+.w-dasharc .da-seg.c-cyan.on { stroke: var(--hud-cyan); filter: drop-shadow(0 0 4px rgba(94, 203, 255, .7)); }
+.w-dasharc .da-seg.c-gold.on { stroke: var(--hud-gold); filter: drop-shadow(0 0 4px rgba(233, 196, 106, .7)); }
+.w-dasharc .da-seg.c-red.on  { stroke: var(--hud-red);  filter: drop-shadow(0 0 4px rgba(255, 93, 93, .7)); }
+.w-dasharc .da-speed {
+  fill: var(--hud-white);
+  font-family: var(--hud-font-digit); font-size: 44px; font-weight: 700;
+}
+.w-dasharc .da-unit { fill: rgba(160, 195, 250, .7); font-size: 11px; letter-spacing: 4px; }
+
+/* ============================================================
+   S02 — WINGS
+   ============================================================ */
+
+.w-wings { width: 190px; }
+.w-wings svg { width: 100%; display: block; }
+.w-wings .wg-track {
+  stroke: var(--hud-cyan-dim); stroke-width: 9; fill: none; stroke-linecap: round;
+}
+.w-wings .wg-progress {
+  stroke: var(--hud-cyan); stroke-width: 9; fill: none; stroke-linecap: round;
+  filter: drop-shadow(0 0 5px rgba(94, 203, 255, .75));
+  transition: stroke-dasharray .15s linear;
+}
+.w-wings .wg-speed {
+  fill: var(--hud-white);
+  font-family: var(--hud-font-digit); font-size: 46px; font-weight: 700;
+}
+.w-wings .wg-unit { fill: rgba(160, 195, 250, .7); font-size: 11px; letter-spacing: 4px; }
+
+/* ============================================================
+   ortak instrument parçaları (F01, F05)
+   ============================================================ */
+
+.ins-face { fill: var(--ins-face); }
+.ins-bezel { fill: none; stroke: var(--ins-bezel); stroke-width: 5; }
+.ins-ticks line { stroke: var(--ins-tick); stroke-width: 2; }
+.ins-ticks line.minor { stroke: rgba(221, 229, 239, .4); stroke-width: 1; }
+.ins-ticks text {
+  fill: var(--ins-text);
+  font-family: "Segoe UI", Arial, sans-serif; font-size: 15px; font-weight: 600;
+}
+.ins-label { fill: rgba(221, 229, 239, .55); font-size: 9px; letter-spacing: 3px; }
+.ins-win { fill: #05070b; stroke: #3a4353; stroke-width: 1; }
+.ins-hub { fill: #f4f7fb; stroke: #444; stroke-width: 2; }
+
+/* ============================================================
+   F01 — ALTIMETER
+   ============================================================ */
+
+.w-alt { width: 195px; }
+.w-alt svg { width: 100%; display: block; }
+.w-alt .alt-kolls {
+  fill: rgba(221, 229, 239, .5);
+  font-family: "Consolas", monospace; font-size: 10px;
+}
+.w-alt .alt-digital {
+  fill: var(--hud-cyan);
+  font-family: "Consolas", monospace; font-size: 13px; font-weight: 700;
+}
+.w-alt .alt-n100, .w-alt .alt-n1k {
+  transform-origin: 100px 100px;
+  transition: transform .15s linear;
+}
+.w-alt .alt-n100 line { stroke: #f4f7fb; stroke-width: 3.5; stroke-linecap: round; }
+.w-alt .alt-n1k polygon { fill: #f4f7fb; }
+
+/* ============================================================
+   F02 — ATTITUDE INDICATOR
+   ============================================================ */
+
+.w-adi .adi-scope {
+  position: relative;
+  width: 185px; height: 185px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 5px solid var(--ins-bezel);
+  background: var(--ins-face);
+}
+.w-adi .adi-ball {
+  position: absolute; left: 50%; top: 50%;
+  width: 320px; height: 320px;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(180deg,
+    var(--adi-sky) 0 calc(50% - 1px),
+    #f4f7fb calc(50% - 1px) calc(50% + 1px),
+    var(--adi-ground) calc(50% + 1px) 100%);
+  transition: transform .15s linear;
+}
+.w-adi .adi-lad {
+  position: absolute; left: 50%;
+  transform: translateX(-50%);
+  height: 2px;
+  background: rgba(244, 247, 251, .9);
+}
+.w-adi .adi-ladnum {
+  position: absolute;
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 11px; font-weight: 600;
+  color: rgba(244, 247, 251, .9);
+  width: 14px; text-align: center;
+}
+.w-adi .adi-fixed {
+  position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex; align-items: center; gap: 10px;
+  pointer-events: none;
+}
+.w-adi .adi-wing {
+  width: 44px; height: 5px;
+  background: #ffb03b;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .6);
+}
+.w-adi .adi-dot {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: #ffb03b;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .6);
+}
+.w-adi .adi-pointer {
+  position: absolute; left: 50%; top: 6px;
+  transform: translateX(-50%);
+  border: 7px solid transparent;
+  border-top-color: #f4f7fb;
+}
+
+/* ============================================================
+   F05 — TURN COORDINATOR
+   ============================================================ */
+
+.w-tc { width: 195px; }
+.w-tc svg { width: 100%; display: block; }
+.w-tc .tc-mark { stroke: var(--ins-tick); stroke-width: 3; stroke-linecap: round; }
+.w-tc .tc-lr {
+  fill: var(--ins-text);
+  font-family: "Segoe UI", Arial, sans-serif; font-size: 13px; font-weight: 700;
+}
+.w-tc .tc-plane {
+  transform-origin: 100px 100px;
+  transition: transform .15s linear;
+}
+.w-tc .tc-plane line { stroke: #f4f7fb; stroke-width: 4.5; stroke-linecap: round; }
+.w-tc .tc-tube {
+  fill: rgba(232, 237, 244, .1);
+  stroke: rgba(232, 237, 244, .4); stroke-width: 1.5;
+}
+.w-tc .tc-ref { stroke: rgba(232, 237, 244, .7); stroke-width: 2; }
+.w-tc .tc-ball {
+  fill: #0a0d12;
+  stroke: #f4f7fb; stroke-width: 1.5;
+  transition: cx .15s linear;
+}

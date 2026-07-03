@@ -1,5 +1,10 @@
 # CarHUD Samples
 
+> **Seçilen tasarımlar:** [`selected/`](selected/) klasöründe — Classic Gauge,
+> A1 Horizon, S01 Dash Arc, S02 Wings, F01 Altimeter, F02 Attitude,
+> F05 Turn Coordinator. Bağımsız pakettir, doğrudan FiveM resource'una
+> kopyalanabilir. Kullanım: [`selected/README.md`](selected/README.md)
+
 FiveM HUD script'lerinde kullanılabilecek **araç HUD widget tasarım örnekleri**.
 Referans görseldeki koyu lacivert zemin + cyan glow + altın vurgu paleti baz alınmıştır.
 Sadece tasarım içerir — oyun mantığı yoktur, kendi client script'inize bağlarsınız.
@@ -145,6 +150,7 @@ widget-packs.html      → 3 widget paketi × 5 tasarım vitrini
 speed-gallery.html     → 15 hız göstergesi tasarımı vitrini
 aero-gallery.html      → 15 uçak hız ölçer tasarımı vitrini
 cockpit-gallery.html   → 15 uçak göstergesi (tam set) vitrini
+selected/              → SEÇİLEN 7 tasarımın bağımsız paketi (taşımaya hazır)
 css/hud.css            → widget vitrini stilleri
 css/classic-gauge.css  → Classic Gauge çekirdek stil + 6 tema
 css/widget-packs.css   → widget paketlerinin stilleri

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Selected Widgets — Seçilen Tasarımlar</title>
+  <link rel="stylesheet" href="selected.css">
+</head>
+<body>
+
+  <header class="showcase-header">
+    <h1>SELECTED <span>WIDGETS</span></h1>
+    <p>SEÇİLEN 7 TASARIM &bull; BAĞIMSIZ VE TAŞIMAYA HAZIR &bull; FIVEM NUI READY</p>
+  </header>
+
+  <h2 class="group-title">ARAÇ <em>/ hız göstergeleri (km/h)</em></h2>
+  <main class="showcase-grid pack">
+    <section class="showcase-cell">
+      <h3 class="cell-title">Classic Gauge <small>ana widget / ice tema</small></h3>
+      <div class="js-classic-gauge" id="selClassic"></div>
+    </section>
+    <section class="showcase-cell">
+      <h3 class="cell-title">A1 &mdash; Horizon <small>yarım yay</small></h3>
+      <div class="w-horizon" id="selHorizon"></div>
+    </section>
+    <section class="showcase-cell">
+      <h3 class="cell-title">S01 &mdash; Dash Arc <small>segmentli yay</small></h3>
+      <div class="w-dasharc" id="selDash"></div>
+    </section>
+    <section class="showcase-cell">
+      <h3 class="cell-title">S02 &mdash; Wings <small>çift kanat yay</small></h3>
+      <div class="w-wings" id="selWings"></div>
+    </section>
+  </main>
+
+  <h2 class="group-title">UÇAK <em>/ kokpit göstergeleri</em></h2>
+  <main class="showcase-grid pack">
+    <section class="showcase-cell">
+      <h3 class="cell-title">F01 &mdash; Altimeter <small>çift ibreli / feet</small></h3>
+      <div class="w-alt" id="selAlt"></div>
+    </section>
+    <section class="showcase-cell">
+      <h3 class="cell-title">F02 &mdash; Attitude <small>suni ufuk</small></h3>
+      <div class="w-adi" id="selAdi"></div>
+    </section>
+    <section class="showcase-cell">
+      <h3 class="cell-title">F05 &mdash; Turn Coord <small>dönüş koordinatörü</small></h3>
+      <div class="w-tc" id="selTc"></div>
+    </section>
+  </main>
+
+  <footer class="showcase-footer">
+    Veri köprüsü: SendNUIMessage({ type = 'carhud', speed, alt, pitch, roll, slip })
+    &mdash; ayrıntılar selected/README.md içinde.
+  </footer>
+
+  <script src="selected.js"></script>
+  <script src="selected-demo.js"></script>
+</body>
+</html>
