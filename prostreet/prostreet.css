@@ -1,0 +1,63 @@
+/* ============================================================
+   ProStreet — açık kadranlı gerçekçi takometre (bağımsız)
+   ============================================================ */
+
+:root {
+  --ps-font: "Segoe UI", "Roboto", Arial, sans-serif;
+  --ps-digit: "Bahnschrift", "Arial Black", "Segoe UI", sans-serif;
+}
+
+/* vitrin ortalaması — HUD'a taşırken bu body stilini almayın */
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: #0a0c10;
+}
+
+.w-ps { width: 260px; }
+.w-ps svg { width: 100%; display: block; }
+
+.w-ps .ps-tick { stroke: #23262b; stroke-width: 3; }
+.w-ps .ps-num {
+  fill: #23262b;
+  font-family: var(--ps-font);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.w-ps .ps-needle { transition: transform .1s linear; }
+
+.w-ps .ps-shift {
+  fill: rgba(210, 53, 42, .12);
+  stroke: rgba(210, 53, 42, .35);
+  stroke-width: 1;
+}
+.w-ps .ps-shifttext {
+  fill: rgba(210, 53, 42, .4);
+  font-family: var(--ps-digit);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+.w-ps.shift .ps-shift { fill: #d2352a; }
+.w-ps.shift .ps-shifttext {
+  fill: #fff;
+  animation: psBlink .3s steps(2) infinite;
+}
+@keyframes psBlink { 50% { opacity: .25; } }
+
+.w-ps .ps-speed {
+  fill: #52f57a;
+  font-family: "Consolas", monospace;
+  font-size: 17px;
+  font-weight: 700;
+}
+.w-ps .ps-unit {
+  fill: #3a3f47;
+  font-family: var(--ps-font);
+  font-size: 11px;
+  font-weight: 700;
+}
+.w-ps .ps-gear { fill: #d2352a; font-weight: 800; }
